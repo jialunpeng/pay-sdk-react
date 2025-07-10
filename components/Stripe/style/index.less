@@ -1,0 +1,38 @@
+@import '../../style/default.less';
+@import '../../Button/style/index.less';
+@import '../../pay-modal/style/index.less';
+@import '../../pay-popup/style/index.less';
+
+.@{prefix}-stripe-modal.@{prefix}-modal {
+  .@{prefix}-modal__content {
+    // sm: >= 576px
+    @media (min-width: 576px) {
+      width: 72%;
+    }
+
+    // md: >= 768px
+    @media (min-width: 768px) {
+      width: 50%;
+    }
+
+    // lg: >= 992px
+    @media (min-width: 992px) {
+      width: 40%;
+    }
+
+    // xl: >= 1200px
+    @media (min-width: 1200px) {
+      width: 27%;
+    }
+
+    // xxl: >= 1600px
+    @media (min-width: 1600px) {
+      width: 26%;
+    }
+
+    // xxxl: >= 2000px
+    @media (min-width: 2000px) {
+      width: 20%;
+    }
+  }
+}

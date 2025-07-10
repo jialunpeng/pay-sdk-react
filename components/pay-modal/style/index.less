@@ -1,0 +1,106 @@
+@import '../../style/default.less';
+
+.@{prefix}-modal {
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__mask {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.55);
+    z-index: 0;
+  }
+
+  &__content {
+    position: relative;
+    z-index: 1;
+    background: #fff;
+    border-radius: 16px;
+    padding: 42px 20px 20px 20px;
+    min-width: 280px;
+    max-width: 80vw;
+    box-shadow: 0 4px 24px #0001;
+    text-align: center;
+    max-height: 60vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__close {
+    position: absolute;
+    right: 12px;
+    top: 12px;
+    background: none;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+    text-align: left;
+  }
+
+  &__icon {
+    margin-bottom: 8px;
+    font-size: 40px;
+  }
+
+  &__title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #222;
+    margin-bottom: 12px;
+  }
+
+  &__desc {
+    color: #222;
+    font-size: 15px;
+    margin-bottom: 24px;
+    line-height: 1.7;
+    text-align: left;
+  }
+
+  &__content-wrapper {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    overflow-y: auto;
+    flex: 1;
+    min-height: 0;
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 16px;
+  }
+
+  &__btn {
+    min-width: 96px;
+    padding: 8px 0;
+    border-radius: 24px;
+    border: none;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  &__btn--retry {
+    background: #fff;
+    color: #f25a5a;
+    border: 1.5px solid #f25a5a;
+  }
+  &__btn--finish {
+    background: #f25a5a;
+    color: #fff;
+    border: none;
+  }
+}

@@ -1,11 +1,10 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "types": ["node", "react", "react-dom"],
+    "jsx": "react-jsx",
+    "target": "ESNext",
+    "module": "ESNext",
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -13,14 +12,23 @@
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
-    "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx"
+    "declaration": true,
+    "declarationMap": false,
+    "emitDeclarationOnly": true, // 关键：让 tsc 生成 JS 和类型文件
+    "rootDir": "./components", // 关键：源码根目录设为 components
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "noEmit": false,
+    "baseUrl": "./",
+    "paths": {
+      "pay-sdk-react": ["components/index.ts"]
+    }
   },
-  "include": [
-    "src"
-  ]
+  "include": ["components/**/*"], // 只处理 components 目录
+  "exclude": ["node_modules", "**/__tests__/**", "dist"]
 }

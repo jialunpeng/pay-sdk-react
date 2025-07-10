@@ -1,0 +1,109 @@
+@import '../../style/default.less';
+@import '../../Mask/style/index.less';
+@import '../../icons/style/index.less';
+
+.@{prefix}-popup {
+  position: fixed;
+  z-index: 1001;
+}
+
+/* Base container for the animated popup body */
+.@{prefix}-popup-body {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  z-index: 1010;
+  box-sizing: border-box;
+}
+
+/* --- Sizing and Positioning --- */
+.@{prefix}-popup-body.@{prefix}-popup-body-position-bottom {
+  width: 100%;
+  left: 0;
+  bottom: 0;
+}
+.@{prefix}-popup-body.@{prefix}-popup-body-position-top {
+  width: 100%;
+  left: 0;
+  top: 0;
+}
+.@{prefix}-popup-body.@{prefix}-popup-body-position-left {
+  height: 100%;
+  width: 80vw;
+  left: 0;
+  top: 0;
+}
+.@{prefix}-popup-body.@{prefix}-popup-body-position-right {
+  height: 100%;
+  width: 80vw;
+  right: 0;
+  top: 0;
+}
+
+/* --- Round Corners Modifier --- */
+.@{prefix}-popup-body.@{prefix}-popup-body-round.@{prefix}-popup-body-position-bottom {
+  border-radius: 16px 16px 0 0;
+}
+.@{prefix}-popup-body.@{prefix}-popup-body-round.@{prefix}-popup-body-position-top {
+  border-radius: 0 0 16px 16px;
+}
+.@{prefix}-popup-body.@{prefix}-popup-body-round.@{prefix}-popup-body-position-left {
+  border-radius: 0 16px 16px 0;
+}
+.@{prefix}-popup-body.@{prefix}-popup-body-round.@{prefix}-popup-body-position-right {
+  border-radius: 16px 0 0 16px;
+}
+
+/* --- Close Icon --- */
+.@{prefix}-popup-close-icon {
+  position: absolute;
+  z-index: 1;
+  cursor: pointer;
+  padding: 4px;
+  font-size: 18px;
+  line-height: 1;
+  color: #999;
+}
+
+.@{prefix}-popup-body.@{prefix}-popup-body-position-bottom
+  .@{prefix}-popup-close-icon,
+.@{prefix}-popup-body.@{prefix}-popup-body-position-left
+  .@{prefix}-popup-close-icon {
+  top: 8px;
+  right: 8px;
+}
+
+.@{prefix}-popup-body.@{prefix}-popup-body-position-top
+  .@{prefix}-popup-close-icon {
+  bottom: 8px;
+  right: 8px;
+}
+
+.@{prefix}-popup-body.@{prefix}-popup-body-position-right
+  .@{prefix}-popup-close-icon {
+  top: 8px;
+  left: 8px;
+}
+
+/* --- Content Area --- */
+.@{prefix}-popup-content {
+  flex: 1;
+  // padding: 20px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* --- Padding adjustment when close icon is visible --- */
+.@{prefix}-popup-body.@{prefix}-popup-body-with-close {
+  &.@{prefix}-popup-body-position-bottom .@{prefix}-popup-content,
+  &.@{prefix}-popup-body-position-left .@{prefix}-popup-content {
+    padding-top: 40px;
+  }
+  &.@{prefix}-popup-body-position-right .@{prefix}-popup-content {
+    padding-top: 40px;
+  }
+  &.@{prefix}-popup-body-position-top .@{prefix}-popup-content {
+    padding-bottom: 40px;
+  }
+}

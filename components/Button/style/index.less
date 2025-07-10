@@ -1,0 +1,105 @@
+@import '../../style/default.less';
+@import '../../dot-loading/style/index.less';
+
+.@{prefix}-button {
+  display: inline-block;
+  padding: 7px 12px;
+  font-size: 16px;
+  border-radius: 4px;
+  border: 1px solid #eee;
+  background: #fff;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.2s;
+  user-select: none;
+  position: relative;
+  text-align: center;
+
+  &-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+
+  &-block {
+    display: block;
+    width: 100%;
+  }
+  &-disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+  &-loading {
+    cursor: wait;
+  }
+  &-loading-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+
+  // 颜色
+  &-primary {
+    background: #1677ff;
+    border-color: #1677ff;
+    color: #fff;
+    &:hover {
+      background: #409eff;
+    }
+  }
+  &-success {
+    background: #00b578;
+    border-color: #00b578;
+    color: #fff;
+  }
+  &-danger {
+    background: #ff3141;
+    border-color: #ff3141;
+    color: #fff;
+  }
+  &-warning {
+    background: #ff8f1f;
+    border-color: #ff8f1f;
+    color: #fff;
+  }
+  &-default {
+    background: #fff;
+    border-color: #eee;
+    color: #333;
+  }
+
+  // 填充模式
+  &-fill-outline {
+    background: transparent;
+    color: inherit;
+  }
+  &-fill-none {
+    background: transparent;
+    border: none;
+    color: inherit;
+  }
+
+  // 尺寸
+  &-mini {
+    font-size: 12px;
+    padding: 2px 8px;
+  }
+  &-small {
+    font-size: 14px;
+    padding: 4px 10px;
+  }
+  &-large {
+    font-size: 18px;
+    padding: 10px 18px;
+  }
+
+  // 形状
+  &-shape-rounded {
+    border-radius: 1000px;
+  }
+  &-shape-rectangular {
+    border-radius: 0;
+  }
+}

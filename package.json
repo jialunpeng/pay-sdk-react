@@ -1,27 +1,91 @@
 {
-  "name": "pay-sdk",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@testing-library/dom": "^10.4.0",
-    "@testing-library/jest-dom": "^6.6.3",
-    "@testing-library/react": "^16.3.0",
-    "@testing-library/user-event": "^13.5.0",
-    "@types/jest": "^27.5.2",
-    "@types/node": "^16.18.126",
-    "@types/react": "^19.1.8",
-    "@types/react-dom": "^19.1.6",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0",
-    "react-scripts": "5.0.1",
-    "typescript": "^4.9.5",
-    "web-vitals": "^2.1.4"
+  "name": "pay-sdk-react",
+  "version": "1.1.2",
+  "private": false,
+  "publishConfig": {
+    "access": "public"
   },
+  "description": "A cross-platform payment SDK for React, supporting Alipay, WeChat Pay, PayPal, Stripe, Payssion, and Airwallex, compatible with H5, PC, and App environments.",
+  "keywords": [
+    "react",
+    "payment",
+    "pay",
+    "sdk",
+    "支付宝",
+    "alipay",
+    "微信",
+    "wechat",
+    "paypal",
+    "stripe",
+    "payssion",
+    "空中云汇",
+    "airwallex",
+    "跨端",
+    "h5",
+    "pc",
+    "app",
+    "跨平台",
+    "支付",
+    "react payment",
+    "react pay",
+    "react sdk"
+  ],
+  "author": "jialunpeng",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jialunpeng/pay-sdk-react.git"
+  },
+  "homepage": "https://github.com/jialunpeng/pay-sdk-react",
+  "bugs": {
+    "url": "https://github.com/jialunpeng/pay-sdk-react/issues"
+  },
+  "files": [
+    "dist"
+  ],
+  "module": "./dist/es/index.js",
+  "main": "./dist/lib/index.js",
+  "unpkg": "./dist/umd/pay-sdk-react.umd.js",
+  "types": "./dist/es/index.d.ts",
+  "sideEffects": [
+    "dist/**/*",
+    "es/**/style/*",
+    "lib/**/style/*",
+    "*.less"
+  ],
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "lint": "eslint components --ext .ts,.tsx,.js,.jsx",
+    "lint:fix": "eslint components --ext .ts,.tsx,.js,.jsx --fix",
+    "format": "prettier --write components",
+    "format:check": "prettier --check components",
+    "prepare": "pnpm lint-staged && husky install",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "clean": "rimraf dist",
+    "build:types": "tsc -p ./build-config/tsconfig.esm.json",
+    "build:es": "babel components --out-dir dist/es --extensions \".ts,.tsx\" --config-file ./build-config/babel.esm.config.json --ignore \"**/*.test.ts,**/*.test.tsx,**/*.spec.ts,**/*.spec.tsx\"",
+    "build:lib": "babel components --out-dir dist/lib --extensions \".ts,.tsx\" --config-file ./build-config/babel.cjs.config.json --ignore \"**/*.test.ts,**/*.test.tsx,**/*.spec.ts,**/*.spec.tsx\"",
+    "build:umd": "rollup -c",
+    "build:less": "gulp --gulpfile ./build-config/gulpfile.js",
+    "build": "pnpm clean && pnpm build:types && pnpm build:es && pnpm build:lib && pnpm build:less && pnpm build:umd",
+    "build:watch": "pnpm build:es --watch",
+    "prepublishOnly": "npm run build",
+    "prepack": "npm run build"
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx}": [
+      "npx eslint components/ --fix"
+    ],
+    "*.{cjs,json}": [
+      "prettier --write"
+    ],
+    "*.{vue,html}": [
+      "eslint --fix"
+    ],
+    "*.{scss,css}": [],
+    "*.md": [
+      "prettier --write"
+    ]
   },
   "eslintConfig": {
     "extends": [
@@ -40,5 +104,78 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "peerDependencies": {
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
+  },
+  "dependencies": {
+    "@react-spring/web": "^10.0.1",
+    "@stripe/react-stripe-js": "^3.7.0",
+    "@stripe/stripe-js": "^7.4.0",
+    "@use-gesture/react": "^10.3.1",
+    "ahooks": "^3.8.5",
+    "airwallex-payment-elements": "^1.122.0",
+    "qrcode": "^1.5.4"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.27.2",
+    "@babel/core": "^7.27.7",
+    "@babel/preset-env": "^7.27.2",
+    "@babel/preset-react": "^7.27.1",
+    "@babel/preset-typescript": "^7.27.1",
+    "@chromatic-com/storybook": "^3.2.6",
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
+    "@eslint/js": "^9.29.0",
+    "@rollup/plugin-babel": "^6.0.4",
+    "@rollup/plugin-commonjs": "^28.0.6",
+    "@rollup/plugin-node-resolve": "^16.0.1",
+    "@rollup/plugin-typescript": "^12.1.4",
+    "@storybook/addon-essentials": "^8.6.14",
+    "@storybook/addon-interactions": "^8.6.14",
+    "@storybook/addon-onboarding": "^8.6.14",
+    "@storybook/blocks": "^8.6.14",
+    "@storybook/preset-create-react-app": "^8.6.14",
+    "@storybook/react": "^8.6.14",
+    "@storybook/react-vite": "^8.6.14",
+    "@storybook/test": "^8.6.14",
+    "@types/node": "^16.18.126",
+    "@types/qrcode": "^1.5.5",
+    "@types/react": "^18.3.1",
+    "@types/react-dom": "^18.3.1",
+    "@typescript-eslint/eslint-plugin": "^8.35.0",
+    "@typescript-eslint/parser": "^8.35.0",
+    "@vitejs/plugin-react": "^4.6.0",
+    "css-loader": "^7.1.2",
+    "eslint": "^9.29.0",
+    "eslint-config-prettier": "^10.1.5",
+    "eslint-plugin-prettier": "^5.5.0",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-storybook": "^0.12.0",
+    "globals": "^16.2.0",
+    "gulp": "^5.0.1",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-less": "^5.0.0",
+    "gulp-rename": "^2.1.0",
+    "gulp-replace": "^1.1.4",
+    "husky": "^9.1.7",
+    "less": "^4.3.0",
+    "less-loader": "^12.3.0",
+    "less-plugin-clean-css": "^1.6.0",
+    "lint-staged": "^16.1.2",
+    "prettier": "^3.6.1",
+    "prop-types": "^15.8.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "rimraf": "^6.0.1",
+    "rollup": "^4.44.1",
+    "rollup-plugin-terser": "^7.0.2",
+    "storybook": "^8.6.14",
+    "style-loader": "^4.0.0",
+    "tslib": "^2.8.1",
+    "typescript": "^4.9.5"
+  },
+  "_unpkg": true
 }

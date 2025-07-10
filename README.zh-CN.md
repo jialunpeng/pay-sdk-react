@@ -1,41 +1,41 @@
 <div align="center">
 
-English | [简体中文](./README.zh-CN.md)
+[English](./README.md) | 简体中文
 
 </div>
 
-# Features
+# 特征
 
 
-## Comprehensive
-Supports mainstream payment methods such as Alipay, WeChat Pay, PayPal, Stripe, Payssion, and Airwallex, covering the vast majority of business scenarios.
+## 全面
+支持支付宝、微信、PayPal、Stripe、Payssion、空中云汇（Airwallex）等主流支付方式，覆盖绝大部分业务场景。
 
-## Cross-Platform Compatibility
-Available for H5, PC, and App scenarios, adaptable to multiple platforms to meet diverse business needs.
+## 跨端适配
+H5、PC、App跨端 场景均可用，适配多端，满足多样化业务需求。
 
-## TypeScript Friendly
-All components are written in TypeScript, ensuring type safety and an excellent development experience.
+## TypeScript 友好
+所有组件均由 TypeScript 编写，类型安全，开发体验优秀。
 
-## Multiple Integration Forms
-Supports payment buttons, modals, QR codes, forms, popups, modals, overlays, and more. Flexible combinations to suit various business scenarios.
+## 多种承接形式
+支持支付按钮、弹窗、二维码、表单、popup、modal、蒙层等多种支付承接方式，灵活组合，满足不同业务场景。
 
-# Install
+# 安装
 [npm package](https://www.npmjs.com/package/pay-sdk-react)
 
 ```shell
-# With npm
+# 使用 npm
 npm install pay-sdk-react
 
-# With yarn
+# 使用 yarn
 yarn add pay-sdk-react
 
-# With pnpm
+# 使用 pnpm
 pnpm add pay-sdk-react
 ```
 
-## Example
+## 示例
 
-### Basic Usage
+### 基础使用
 
 ```typescript
 import React from 'react';
@@ -45,25 +45,25 @@ import 'pay-sdk-react/dist/css/index.css';
 
 function App() {
   return (
-    <PayButton payMethod={PaymentMethod.PaypalH5} paypalUrl={''} />
+    <PayButton payMethod={PaymentMethod.PaypalH5} paypalUrl={''}, />
   );
 }
 
 ReactDOM.render(<App />, document.getElementById('app'));
 ```
 
-### On-Demand Loading
-Using babel-plugin-import
+### 按需加载
+使用 babel-plugin-import
 
-#### 1. Install
+#### 1. 安装
 
 ```shell
 npm i babel-plugin-import -D
 ```
 
 
-#### 2. Add Configuration: Component and Style On-demand Import
-Add the following to your babel config:
+#### 2. 添加配置：组件和样式的按需加载
+在 babel 配置中加入：
 
 ```js
 plugins: [
@@ -73,24 +73,25 @@ plugins: [
       libraryName: 'pay-sdk-react',
       libraryDirectory: 'es',
       camel2DashComponentName: false,
-      style: true, // Enable style on-demand import
+      style: true, // 样式按需加载
     },
   ],
 ];
 ```
 
-# Payment Scenarios & Usage
+# 支付场景与用法
 
-## Alipay
-### PC
+## 支付宝
+### PC 端
 
-#### Method 1: Use the provided Pay Button
-Import the Pay Button, click to trigger a modal displaying the Alipay QR code.
+#### 方式一：使用 PayButton
+引入 PayButton 按钮，点击唤起支付弹窗，展示支付宝二维码。
 
 ```typescript
 import { PayButton, PaymentMethod } from 'pay-sdk-react';
 
 const AlipayComponent = () => {
+
   const createOrder = async () => {
     const res = await fetch('/create-order', {
       method: 'POST',
@@ -100,7 +101,7 @@ const AlipayComponent = () => {
 
   return (
     <div className="alipay-component">
-      <h3>PayButton - Basic Usage</h3>
+      <h3>PayButton-基础用法</h3>
       <PayButton payMethod={PaymentMethod.AlipayPc} createOrder={createOrder}>
         Pay Button
       </PayButton>
@@ -111,7 +112,8 @@ const AlipayComponent = () => {
 export default AlipayComponent;
 ```
 
-#### Method 2: Use a Alipay button
+#### 方式二：Alipay.Button
+引入 Alipay，Alipay.Button 点击唤起支付弹窗，展示支付宝二维码。
 ```typescript
 import { Alipay } from 'pay-sdk-react';
 
@@ -135,8 +137,8 @@ export default AlipayComponent;
 ```
 
 
-#### Method 2: Use a custom button
-Use your own button, and call the modal component to display the QR code.
+#### 方式三：自定义按钮
+使用自定义按钮，调用支付弹窗组件，展示二维码。
 
 ```typescript
 import { useRef, useState } from 'react';
@@ -158,15 +160,15 @@ const AlipayComponent = () => {
 
   return (
     <div className="alipay-component">
-      <h3>Custom Button - Trigger modal with visible prop</h3>
-      <button onClick={() => setModalVisible(true)}>Custom Button</button>
+      <h3>自定义 Button - visible 参数唤起 modal</h3>
+      <button onClick={() => setModalVisible(true)}>自定义 Button</button>
       <Alipay.Modal
         visible={modalVisible}
         onClose={() => setModalVisible(false)}
         alipayProps={{ formHtml }}
       />
-      <h3>Custom Button - Trigger modal with ref open method</h3>
-      <button onClick={() => createOrder()}>Custom Button</button>
+      <h3>自定义 Button - ref open 方法唤起 modal</h3>
+      <button onClick={() => createOrder()}>自定义 Button</button>
       <Alipay.Modal ref={modalRef} />
     </div>
   );
@@ -176,8 +178,8 @@ export default AlipayComponent;
 
 ```
 
-#### Method 4: Custom integration
-Directly import the QR code component and customize the integration and display timing.
+#### 方式四：自定义承接
+直接引入二维码组件，自定义承接方式&展示时机。
 
 ```typescript
 import { Alipay } from 'pay-sdk-react';
@@ -195,11 +197,11 @@ const AlipayComponent = () => {
 export default AlipayComponent;
 ```
 
-### H5
+### H5 端
 
-#### Method 1: PayButton
-Import the PayButton, click to trigger a waiting modal (or overlay), auto-submit the iframe form to launch the Alipay app, or open in browser if the app is not installed.
-Result handling: supports both modal and overlay.
+#### 方式一：PayButton
+引入支付按钮，点击唤起等待支付弹窗（或蒙层），自动提交 iframe 表单唤起支付宝 App，无 App 时跳转浏览器。
+等待结果承接：支持弹窗和蒙层两种方式。
 
 ```typescript
 import { PayButton, PaymentMethod } from 'pay-sdk-react';
@@ -214,7 +216,7 @@ const MAlipayComponent = () => {
 
   return (
     <div className="m-alipay-component">
-      <h3>PayButton - Basic Usage</h3>
+      <h3>PayButton-基础用法</h3>
       <PayButton
         payMethod={PaymentMethod.AlipayH5}
         createOrder={createOrder}
@@ -229,7 +231,7 @@ const MAlipayComponent = () => {
 export default MAlipayComponent;
 ```
 
-#### Method 2: MAlipay.Button
+#### 方式二：MAlipay.Button
 
 ```typescript
 import { MAlipay } from "pay-sdk-react";
@@ -260,8 +262,8 @@ export default MAlipayComponent;
 ```
 
 
-#### Method 3: Custom form
-Import the MAlipay form component and customize the trigger timing.
+#### 方式三：自定义表单
+引入 MAlipay 表单组件，自定义触发表单时机。
 
 ```typescript
 import { MAlipay } from "pay-sdk-react";
@@ -272,7 +274,7 @@ const MAlipayComponent = () => {
 
   return (
     <div className="yfm-m-alipay-component">
-      <h3>Alipay Form</h3>
+      <h3>Alipay 表单</h3>
       <MAlipay formHtml={formHtml} />
     </div>
   );
@@ -281,12 +283,12 @@ const MAlipayComponent = () => {
 export default MAlipayComponent;
 ```
 
-## WeChat
+## 微信
 
-### PC
+### PC 端
 
-#### Method 1: PayButton
-Import the PayButton, click to trigger a modal displaying the WeChat QR code.
+#### 方式一：PayButton
+引入支付按钮，点击唤起支付弹窗，展示微信二维码。
 
 ```typescript
 import { PayButton, PaymentMethod } from 'pay-sdk-react';
@@ -301,7 +303,7 @@ const WechatComponent = () => {
 
   return (
     <div className="wechat-component">
-      <h3>PayButton - Basic Usage</h3>
+      <h3>PayButton-基础用法</h3>
       <PayButton payMethod={PaymentMethod.WechatPc} createOrder={createOrder}>
         Pay Button
       </PayButton>
@@ -312,7 +314,7 @@ const WechatComponent = () => {
 export default WechatComponent;
 ```
 
-#### Method 2: Wechat.Button
+#### 方式二：Wechat.Button
 
 ```typescript
 import { Wechat } from 'pay-sdk-react';
@@ -336,8 +338,8 @@ const WechatComponent = () => {
 export default WechatComponent;
 ```
 
-#### Method 3: Use a custom button
-Use your own button, and call the modal component to display the QR code.
+#### 方式三：自定义按钮
+使用自定义按钮，调用支付弹窗组件，展示二维码。
 
 ```typescript
 import { useRef, useState } from 'react';
@@ -359,16 +361,16 @@ const WechatComponent = () => {
 
   return (
     <div className="wechat-component">
-      <h3>Custom Button - Trigger modal with visible prop</h3>
-      <button onClick={() => setModalVisible(true)}>Custom Button</button>
+      <h3>自定义 Button - visible 参数唤起 modal</h3>
+      <button onClick={() => setModalVisible(true)}>自定义 Button</button>
       <Wechat.Modal
         visible={modalVisible}
         onClose={() => setModalVisible(false)}
         wechatProps={{ wechatUrl }}
       />
 
-      <h3>Custom Button - Trigger modal with ref open method</h3>
-      <button onClick={() => createOrder()}>Custom Button</button>
+      <h3>自定义 Button - ref open 方法唤起 modal</h3>
+      <button onClick={() => createOrder()}>自定义 Button</button>
       <Wechat.Modal ref={modalRef} />
     </div>
   );
@@ -377,8 +379,8 @@ const WechatComponent = () => {
 export default WechatComponent;
 ```
 
-#### Method 4: Custom integration
-Directly import the QR code component and customize the integration and display timing.
+#### 方式四：自定义承接
+直接引入二维码组件，自定义承接和唤起方式。
 
 ```typescript
 import { Wechat } from 'pay-sdk-react';
@@ -388,7 +390,7 @@ const wechatUrl = 'weixin://wxpay/...';
 const WechatComponent = () => {
   return (
     <div className="wechat-component">
-      <h3>Directly use Wechat - Custom integration and display timing</h3>
+      <h3>直接使用 Wechat - 用户自定义承接方式&展示时机</h3>
       <Wechat wechatUrl={wechatUrl} />
     </div>
   );
@@ -397,11 +399,11 @@ const WechatComponent = () => {
 export default WechatComponent;
 ```
 
-### H5
+### H5 端
 
-#### Method 1: PayButton
-Import the PayButton, click to trigger a waiting modal (or overlay), auto-open the WeChat payment link, and auto-trigger payment in the WeChat browser.
-Result handling: supports both modal and overlay.
+#### 方式一：PayButton
+引入支付按钮，点击唤起等待支付弹窗（或蒙层），自动打开微信支付链接，微信内浏览器自动唤起支付。
+等待结果承接：支持弹窗和蒙层两种方式。
 
 ```typescript
 import { PayButton, PaymentMethod } from 'pay-sdk-react';
@@ -416,11 +418,11 @@ const MWechatComponent = () => {
 
   return (
     <div className="m-wechat-component">
-      <h3>PayButton - Basic Usage</h3>
+      <h3>PayButton - 基础用法</h3>
       <PayButton payMethod={PaymentMethod.WechatH5} createOrder={createOrder}>
         Pay Button
       </PayButton>
-      <h3>PayButton - Mask</h3>
+      <h3>PayButton - mask</h3>
       <PayButton
         payMethod={PaymentMethod.WechatH5}
         createOrder={createOrder}
@@ -435,7 +437,7 @@ const MWechatComponent = () => {
 export default MWechatComponent;
 ```
 
-#### Method 2: MWechatButton
+#### 方式二：MWechatButton
 
 ```typescript
 import { MWechatButton } from 'pay-sdk-react';
@@ -445,7 +447,7 @@ const wechatUrl = 'https://wx.tenpay.com/cgi-bin/mmpayweb-bin/checkmweb?...';
 const MWechatComponent = () => {
   return (
     <div className="m-wechat-component">
-      <h3>Wechat Button - Modal</h3>
+      <h3>wechat Button - modal</h3>
       <MWechatButton displayType={'modal'} modalProps={{ payUrl: wechatUrl }}>
         Wechat Button
       </MWechatButton>
@@ -458,8 +460,8 @@ export default MWechatComponent;
 
 ## PayPal
 
-### Method 1: PayButton
-Import the PayButton, click to trigger payment, auto-open the PayPal payment link, and show a waiting overlay.
+### 方式一：PayButton
+引入支付按钮，点击唤起支付，自动打开 PayPal 支付链接，同时展示等待支付结果蒙层。
 
 ```typescript
 import { PayButton, PaymentMethod } from 'pay-sdk-react';
@@ -474,12 +476,12 @@ const PaypalComponent = () => {
 
   return (
     <div className="paypal-component">
-      <h3>PayButton - Basic Usage</h3>
+      <h3>PayButton-基础用法</h3>
       <PayButton payMethod={PaymentMethod.PaypalH5} createOrder={createOrder}>
         Pay Button
       </PayButton>
 
-      <h3>PaypalButton - Do not auto open third-party payment page - new tab</h3>
+      <h3>PaypalButton - 不自动打开第三方支付页面 - 新tab</h3>
       <PayButton
         payMethod={PaymentMethod.PaypalH5}
         createOrder={createOrder}
@@ -494,7 +496,7 @@ const PaypalComponent = () => {
 export default PaypalComponent;
 ```
 
-### Method 2: PaypalButton
+### 方式二：PaypalButton
 
 ```typescript
 import { PaypalButton } from 'pay-sdk-react';
@@ -511,7 +513,7 @@ const PaypalComponent = () => {
 
   return (
     <div className="paypal-component">
-      <h3>PaypalButton - Auto open third-party payment page - current tab</h3>
+      <h3>PaypalButton - 自动打开第三方支付页面 - 当前tab</h3>
       <PaypalButton
         createOrder={createOrder}
         maskProps={{ openMode: 'replace' }}
@@ -519,7 +521,7 @@ const PaypalComponent = () => {
         Paypal Button
       </PaypalButton>
 
-      <h3>PaypalButton - Do not auto open third-party payment page - new tab</h3>
+      <h3>PaypalButton - 不自动打开第三方支付页面 - 新tab</h3>
       <PaypalButton
         createOrder={createOrder}
         maskProps={{ autoOpenWindow: false }}
@@ -527,7 +529,7 @@ const PaypalComponent = () => {
         Paypal Button
       </PaypalButton>
 
-      <h3>Paypal Button - Do not auto open third-party payment page - current tab</h3>
+      <h3>Paypal Button - 不自动打开第三方支付页面 - 当前tab</h3>
       <PaypalButton
         maskProps={{
           payUrl: paypalUrl,
@@ -546,7 +548,7 @@ export default PaypalComponent;
 
 ## Stripe
 
-### Method 1: PayButton
+### 方式一：PayButton
 
 ```typescript
 import { PayButton, PaymentMethod } from 'pay-sdk-react';
@@ -560,7 +562,7 @@ const StripeComponent = () => {
 
   return (
     <div className="stripe-component">
-      <h3>PayButton - Basic Usage</h3>
+      <h3>PayButton-基础用法</h3>
       <PayButton payMethod={PaymentMethod.StripeH5} createOrder={createOrder}>
         Pay Button
       </PayButton>
@@ -571,7 +573,7 @@ const StripeComponent = () => {
 export default StripeComponent;
 ```
 
-### Method 2: Stripe.Button
+### 方式二：Stripe.Button
 
 ```typescript
 import { Stripe } from 'pay-sdk-react';
@@ -595,7 +597,7 @@ export default StripeComponent;
 ```
 
 
-### Method 3: Custom trigger popup - Recommended for mobile
+### 方式三：自定义唤起 popup - 推荐 移动端 使用
 
 ```typescript
 import { useRef, useState } from 'react';
@@ -620,15 +622,15 @@ const StripeComponent = () => {
 
   return (
     <div className="stripe-component">
-      <h3>Custom button - Trigger popup with visible prop</h3>
-      <button onClick={() => setPopupVisible(true)}>Custom Button</button>
+      <h3>自定义 button-visible 参数唤起 popup</h3>
+      <button onClick={() => setPopupVisible(true)}>自定义 button</button>
       <Stripe.Popup
         visible={popupVisible}
         onClose={() => setPopupVisible(false)}
         stripeProps={options}
       />
-      <h3>Custom button - Trigger popup with ref open method</h3>
-      <button onClick={() => createOrder()}>Custom Button</button>
+      <h3>自定义 button-ref open 方法唤起 popup</h3>
+      <button onClick={() => createOrder()}>自定义 button</button>
       <Stripe.Popup ref={popupRef} />
     </div>
   );
@@ -637,7 +639,7 @@ const StripeComponent = () => {
 export default StripeComponent;
 ```
 
-### Method 4: Custom trigger modal - Recommended for PC
+### 方式四：自定义唤起 modal - 推荐 PC 端使用
 
 ```typescript
 import { useRef, useState } from 'react';
@@ -662,16 +664,16 @@ const StripeComponent = () => {
 
   return (
     <div className="stripe-component">
-      <h3>Custom button - Trigger modal with visible prop</h3>
-      <button onClick={() => setModalVisible(true)}>Custom Button</button>
+      <h3>自定义 button-visible 参数唤起 modal</h3>
+      <button onClick={() => setModalVisible(true)}>自定义 button</button>
       <Stripe.Modal
         visible={modalVisible}
         onClose={() => setModalVisible(false)}
         stripeProps={options}
       />
 
-      <h3>Custom button - Trigger modal with ref open method</h3>
-      <button onClick={createOrder}>Custom Button</button>
+      <h3>自定义 button-ref open 方法唤起 modal</h3>
+      <button onClick={createOrder}>自定义 button</button>
       <Stripe.Modal ref={modalRef} />
     </div>
   );
@@ -680,8 +682,8 @@ const StripeComponent = () => {
 export default StripeComponent;
 ```
 
-### Method 5: Stripe Form
-Import the Stripe form component and customize the integration and display timing.
+### 方式五：Stripe 表单
+引入 Stripe 表单组件，自定义承接和展示时机。
 
 ```typescript
 import { Stripe } from 'pay-sdk-react';
@@ -694,7 +696,7 @@ const options = {
 const StripeComponent = () => {
   return (
     <div className="stripe-component">
-      <h3>Stripe Form</h3>
+      <h3>Stripe表单</h3>
       <Stripe {...options} />
     </div>
   );
@@ -703,10 +705,10 @@ const StripeComponent = () => {
 export default StripeComponent;
 ```
 
-## Airwallex
+## 空中云汇（Airwallex）
 
-### Method 1: PayButton
-Import the PayButton, click to trigger a popup for the payment form (recommended for mobile), or a modal for PC.
+### 方式一：PayButton
+引入支付按钮，点击唤起 popup 承接表单（推荐移动端），PC 端推荐唤起 modal。
 
 ```typescript
 import { PayButton, PaymentMethod } from 'pay-sdk-react';
@@ -731,14 +733,14 @@ const AirwallexComponent = () => {
         client_secret: res.client_secret,
       },
       onSuccess: () => {
-        window.location.replace('Payment Success Page');
+        window.location.replace('支付成功结果页');
       },
     };
   };
 
   return (
     <div className="airwallex-component">
-      <h3>PayButton - Basic Usage</h3>
+      <h3>PayButton-基础用法</h3>
       <PayButton
         payMethod={PaymentMethod.Airwallex}
         payMode="embedded"
@@ -754,7 +756,7 @@ const AirwallexComponent = () => {
 export default AirwallexComponent;
 ```
 
-### Method 2: Custom trigger popup
+### 方式二：自定义唤起 popup
 
 ```typescript
 import { useRef, useState } from 'react';
@@ -778,7 +780,7 @@ const options = {
     client_secret: clientSecret,
   },
   onSuccess: () => {
-    window.location.replace('Payment Success Page');
+    window.location.replace('支付成功结果页');
   },
 } as const;
 
@@ -806,23 +808,23 @@ const AirwallexComponent = () => {
         client_secret: res.client_secret,
       },
       onSuccess: () => {
-        window.location.replace('Payment Success Page');
+        window.location.replace('支付成功结果页');
       },
     });
   };
 
   return (
     <div className="airwallex-component">
-      <h3>Custom button - Trigger popup with visible prop</h3>
-      <button onClick={() => setPopupVisible(true)}>Custom Button</button>
+      <h3>自定义 button - visible 参数唤起 popup</h3>
+      <button onClick={() => setPopupVisible(true)}>自定义 button</button>
       <Airwallex.Popup
         visible={popupVisible}
         onClose={() => setPopupVisible(false)}
         airwallexProps={options}
       />
 
-      <h3>Custom button - Trigger popup with ref open method</h3>
-      <button onClick={createOrder}>Custom Button</button>
+      <h3>自定义 button - ref open 方法唤起 popup</h3>
+      <button onClick={createOrder}>自定义 button</button>
       <Airwallex.Popup ref={popupRef} />
     </div>
   );
@@ -831,7 +833,7 @@ const AirwallexComponent = () => {
 export default AirwallexComponent;
 ```
 
-### Method 3: Trigger modal
+### 方式三：唤起 modal
 
 ```typescript
 import { useRef, useState } from 'react';
@@ -855,7 +857,7 @@ const options = {
     client_secret: clientSecret,
   },
   onSuccess: () => {
-    window.location.replace('Payment Success Page');
+    window.location.replace('支付成功结果页');
   },
 } as const;
 
@@ -883,23 +885,23 @@ const AirwallexComponent = () => {
         client_secret: res.client_secret,
       },
       onSuccess: () => {
-        window.location.replace('Payment Success Page');
+        window.location.replace('支付成功结果页');
       },
     });
   };
 
   return (
     <div className="airwallex-component">
-      <h3>Custom button - Trigger modal with visible prop</h3>
-      <button onClick={() => setModalVisible(true)}>Custom Button</button>
+      <h3>自定义 button-visible 参数唤起 modal</h3>
+      <button onClick={() => setModalVisible(true)}>自定义 button</button>
       <Airwallex.Modal
         visible={modalVisible}
         onClose={() => setModalVisible(false)}
         airwallexProps={options}
       />
 
-      <h3>Airwallex.button - Trigger modal with ref open method</h3>
-      <button onClick={createOrder}>Custom Button</button>
+      <h3>Airwallex.button - ref open 方法唤起 modal</h3>
+      <button onClick={createOrder}>自定义button</button>
       <Airwallex.Modal ref={modalRef} />
     </div>
   );
@@ -909,8 +911,8 @@ export default AirwallexComponent;
 ```
 
 
-### Method 4: Custom integration
-Import the Airwallex form component and customize the integration and display timing.
+### 方式四：自定义承接
+引入 Airwallex 表单组件，自定义承接和展示时机。
 
 ```typescript
 import { Airwallex } from 'pay-sdk-react';
@@ -933,14 +935,14 @@ const options = {
     client_secret: clientSecret,
   },
   onSuccess: () => {
-    window.location.replace('Payment Success Page');
+    window.location.replace('支付成功结果页');
   },
 } as const;
 
 const AirwallexComponent = () => {
   return (
     <div className="airwallex-component">
-      <h3>Airwallex Form</h3>
+      <h3>Airwallex表单</h3>
       <Airwallex {...options} />
     </div>
   );
@@ -949,8 +951,8 @@ const AirwallexComponent = () => {
 export default AirwallexComponent;
 ```
 
-### Method 5: Airwallex.Button
-Import the Pay Button, click to open a third-party payment link and show a waiting overlay.
+### 方式五：Airwallex.Button
+引入支付按钮，点击打开第三方支付链接，同时唤起等待支付结果蒙层。
 
 ```typescript
 import { Airwallex } from 'pay-sdk-react';
@@ -978,8 +980,8 @@ export default AirwallexComponent;
 
 ## Payssion
 
-### Method 1: PayButton
-Import the PayButton, click to open a third-party payment link and show a waiting overlay.
+### 方式一：PayButton
+引入支付按钮，点击打开第三方支付链接，同时唤起等待支付结果蒙层
 
 ```typescript
 import { PayButton, PaymentMethod } from 'pay-sdk-react';
@@ -994,12 +996,12 @@ const PayssionComponent = () => {
 
   return (
     <div className="payssion-component">
-      <h3>PayButton - Basic Usage</h3>
+      <h3>PayButton-基础用法</h3>
       <PayButton payMethod={PaymentMethod.Payssion} createOrder={createOrder}>
         Pay Button
       </PayButton>
 
-      <h3>Pay Button - Do not auto open third-party payment page</h3>
+      <h3>Pay Button - 不自动打开第三方支付页面</h3>
       <PayButton
         createOrder={createOrder}
         maskProps={{ autoOpenWindow: false }}
@@ -1013,7 +1015,7 @@ const PayssionComponent = () => {
 export default PayssionComponent;
 ```
 
-### Method 2: PayssionButton
+### 方式二：PayssionButton
 
 ```typescript
 import { PayssionButton } from 'pay-sdk-react';
@@ -1028,7 +1030,7 @@ const PayssionComponent = () => {
 
   return (
     <div className="payssion-component">
-      <h3>Payssion Button - Auto open third-party payment page - current tab</h3>
+      <h3>Payssion Button - 自动打开第三方支付页面 - 当前tab</h3>
       <PayssionButton
         createOrder={createOrder}
         maskProps={{ openMode: 'replace' }}
@@ -1036,7 +1038,7 @@ const PayssionComponent = () => {
         Payssion Button
       </PayssionButton>
 
-      <h3>PaypalButton - Do not auto open third-party payment page - new tab</h3>
+      <h3>PaypalButton - 不自动打开第三方支付页面 - 新tab</h3>
       <PayssionButton
         createOrder={createOrder}
         maskProps={{ autoOpenWindow: false }}
@@ -1044,7 +1046,7 @@ const PayssionComponent = () => {
         Payssion Button
       </PayssionButton>
 
-      <h3>PayssionButton - Do not auto open third-party payment page - current tab</h3>
+      <h3>PayssionButton - 不自动打开第三方支付页面 - 当前tab</h3>
       <PayssionButton
         createOrder={createOrder}
         maskProps={{ autoOpenWindow: false, openMode: 'href' }}
