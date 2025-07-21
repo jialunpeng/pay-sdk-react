@@ -24,7 +24,7 @@ export function usePayWindowOpen({
   openMode = 'window',
 }: UsePayWindowOpenOptions) {
   const payWindowRef = useRef<Window | null>(null);
-  const pollTimerRef = useRef<number | null>(null);
+  const pollTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const [isWindowMonitoring, setWindowMonitoring] = useState(false);
 
   // 打开支付窗口
