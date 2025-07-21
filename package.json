@@ -46,6 +46,7 @@
   "module": "./dist/es/index.js",
   "main": "./dist/lib/index.js",
   "unpkg": "./dist/umd/pay-sdk-react.umd.js",
+  "style": "./dist/css/index.css",
   "types": "./dist/es/index.d.ts",
   "sideEffects": [
     "dist/**/*",
@@ -67,7 +68,9 @@
     "build:lib": "babel components --out-dir dist/lib --extensions \".ts,.tsx\" --config-file ./build-config/babel.cjs.config.json --ignore \"**/*.test.ts,**/*.test.tsx,**/*.spec.ts,**/*.spec.tsx\"",
     "build:umd": "rollup -c",
     "build:less": "gulp --gulpfile ./build-config/gulpfile.js",
-    "build": "pnpm clean && pnpm build:types && pnpm build:es && pnpm build:lib && pnpm build:less && pnpm build:umd",
+    "build:less:min": "gulp --gulpfile ./build-config/gulpfile.js min",
+    "build:less:all": "gulp --gulpfile ./build-config/gulpfile.js all",
+    "build": "pnpm clean && pnpm build:types && pnpm build:es && pnpm build:lib && pnpm build:less:all && pnpm build:umd",
     "build:watch": "pnpm build:es --watch",
     "prepublishOnly": "npm run build",
     "prepack": "npm run build"

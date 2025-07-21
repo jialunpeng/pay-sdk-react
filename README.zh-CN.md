@@ -41,7 +41,7 @@ pnpm add pay-sdk-react
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { PayButton, PaymentMethod } from 'pay-sdk-react';
-import 'pay-sdk-react/dist/css/index.css';
+import 'pay-sdk-react/dist/css/index.min.css';
 
 function App() {
   return (
@@ -85,7 +85,7 @@ plugins: [
 ### PC 端
 
 #### 方式一：使用 PayButton
-引入 PayButton 按钮，点击唤起支付弹窗，展示支付宝二维码。
+引入 PayButton 按钮，点击唤起支付弹窗，展示支付宝二维码。用户扫码完成支付后，支付宝会通知业务后端支付结果。
 
 ```typescript
 import { PayButton, PaymentMethod } from 'pay-sdk-react';
@@ -113,7 +113,8 @@ export default AlipayComponent;
 ```
 
 #### 方式二：Alipay.Button
-引入 Alipay，Alipay.Button 点击唤起支付弹窗，展示支付宝二维码。
+引入 Alipay，Alipay.Button 点击唤起支付弹窗，展示支付宝二维码。用户扫码完成支付后，支付宝会通知业务后端支付结果。
+
 ```typescript
 import { Alipay } from 'pay-sdk-react';
 
@@ -138,7 +139,7 @@ export default AlipayComponent;
 
 
 #### 方式三：自定义按钮
-使用自定义按钮，调用支付弹窗组件，展示二维码。
+使用自定义按钮，调用支付弹窗组件，展示二维码。用户扫码完成支付后，支付宝会通知业务后端支付结果。
 
 ```typescript
 import { useRef, useState } from 'react';
@@ -179,7 +180,7 @@ export default AlipayComponent;
 ```
 
 #### 方式四：自定义承接
-直接引入二维码组件，自定义承接方式&展示时机。
+直接引入二维码组件，自定义承接方式&展示时机。用户扫码完成支付后，支付宝会通知业务后端支付结果。
 
 ```typescript
 import { Alipay } from 'pay-sdk-react';
@@ -200,8 +201,7 @@ export default AlipayComponent;
 ### H5 端
 
 #### 方式一：PayButton
-引入支付按钮，点击唤起等待支付弹窗（或蒙层），自动提交 iframe 表单唤起支付宝 App，无 App 时跳转浏览器。
-等待结果承接：支持弹窗和蒙层两种方式。
+引入支付按钮，点击唤起等待支付弹窗（或蒙层），自动提交 iframe 表单唤起支付宝 App，无 App 时跳转浏览器。用户完成支付后，支付宝会通知业务后端支付结果。等待结果承接：支持弹窗和蒙层两种方式。
 
 ```typescript
 import { PayButton, PaymentMethod } from 'pay-sdk-react';
@@ -232,6 +232,7 @@ export default MAlipayComponent;
 ```
 
 #### 方式二：MAlipay.Button
+引入 MAlipay.Button 按钮，点击唤起等待支付弹窗（或蒙层），自动提交 iframe 表单唤起支付宝 App，无 App 时跳转浏览器。用户完成支付后，支付宝会通知业务后端支付结果。
 
 ```typescript
 import { MAlipay } from "pay-sdk-react";
@@ -263,7 +264,7 @@ export default MAlipayComponent;
 
 
 #### 方式三：自定义表单
-引入 MAlipay 表单组件，自定义触发表单时机。
+引入 MAlipay 表单组件，自定义触发表单时机。用户完成支付后，支付宝会通知业务后端支付结果。
 
 ```typescript
 import { MAlipay } from "pay-sdk-react";
@@ -288,7 +289,7 @@ export default MAlipayComponent;
 ### PC 端
 
 #### 方式一：PayButton
-引入支付按钮，点击唤起支付弹窗，展示微信二维码。
+引入支付按钮，点击唤起支付弹窗，展示微信二维码。用户扫码完成支付后，微信会通知业务后端支付结果。
 
 ```typescript
 import { PayButton, PaymentMethod } from 'pay-sdk-react';
@@ -315,6 +316,7 @@ export default WechatComponent;
 ```
 
 #### 方式二：Wechat.Button
+引入 Wechat.Button 按钮，点击唤起支付弹窗，展示微信二维码。用户扫码完成支付后，微信会通知业务后端支付结果。
 
 ```typescript
 import { Wechat } from 'pay-sdk-react';
@@ -339,7 +341,7 @@ export default WechatComponent;
 ```
 
 #### 方式三：自定义按钮
-使用自定义按钮，调用支付弹窗组件，展示二维码。
+使用自定义按钮，调用支付弹窗组件，展示二维码。用户扫码完成支付后，微信会通知业务后端支付结果。
 
 ```typescript
 import { useRef, useState } from 'react';
@@ -380,7 +382,7 @@ export default WechatComponent;
 ```
 
 #### 方式四：自定义承接
-直接引入二维码组件，自定义承接和唤起方式。
+直接引入二维码组件，自定义承接和唤起方式。用户扫码完成支付后，微信会通知业务后端支付结果。
 
 ```typescript
 import { Wechat } from 'pay-sdk-react';
@@ -402,8 +404,7 @@ export default WechatComponent;
 ### H5 端
 
 #### 方式一：PayButton
-引入支付按钮，点击唤起等待支付弹窗（或蒙层），自动打开微信支付链接，微信内浏览器自动唤起支付。
-等待结果承接：支持弹窗和蒙层两种方式。
+引入支付按钮，点击唤起等待支付弹窗（或蒙层），自动打开微信支付链接，微信内浏览器自动唤起支付。用户完成支付后，微信会通知业务后端支付结果。等待结果承接：支持弹窗和蒙层两种方式。
 
 ```typescript
 import { PayButton, PaymentMethod } from 'pay-sdk-react';
@@ -438,6 +439,7 @@ export default MWechatComponent;
 ```
 
 #### 方式二：MWechatButton
+引入 MWechatButton 按钮，点击唤起等待支付弹窗（或蒙层），自动打开微信支付链接，微信内浏览器自动唤起支付。用户完成支付后，微信会通知业务后端支付结果。
 
 ```typescript
 import { MWechatButton } from 'pay-sdk-react';
@@ -460,8 +462,10 @@ export default MWechatComponent;
 
 ## PayPal
 
+引入支付按钮，点击唤起支付，自动打开 PayPal 支付链接，同时展示等待支付结果蒙层。PayPal 支付完成后，PayPal 官方会重定向到业务指定的结果页面，重定向地址由业务后端服务调用 PayPal 官方创建支付订单 API 时传入。
+
 ### 方式一：PayButton
-引入支付按钮，点击唤起支付，自动打开 PayPal 支付链接，同时展示等待支付结果蒙层。
+引入支付按钮，点击唤起支付，自动打开 PayPal 支付链接，同时展示等待支付结果蒙层。用户完成支付后，PayPal 会重定向到业务指定的结果页面。
 
 ```typescript
 import { PayButton, PaymentMethod } from 'pay-sdk-react';
@@ -497,6 +501,7 @@ export default PaypalComponent;
 ```
 
 ### 方式二：PaypalButton
+引入 PaypalButton 按钮，点击唤起支付，自动打开 PayPal 支付链接，同时展示等待支付结果蒙层。用户完成支付后，PayPal 会重定向到业务指定的结果页面。
 
 ```typescript
 import { PaypalButton } from 'pay-sdk-react';
@@ -548,7 +553,10 @@ export default PaypalComponent;
 
 ## Stripe
 
+引入支付组件，使用 Stripe 支付。Stripe 支付完成后，Stripe 官方会重定向到业务指定的结果页面，重定向地址由业务后端服务调用 Stripe 官方创建支付订单 API 时传入。
+
 ### 方式一：PayButton
+引入支付按钮，点击唤起支付 modal 或 popup，展示 Stripe 支付表单。用户完成支付后，Stripe 会重定向到业务指定的结果页面。
 
 ```typescript
 import { PayButton, PaymentMethod } from 'pay-sdk-react';
@@ -574,6 +582,7 @@ export default StripeComponent;
 ```
 
 ### 方式二：Stripe.Button
+引入 Stripe.Button 按钮，点击唤起支付 modal 或 popup，展示 Stripe 支付表单。用户完成支付后，Stripe 会重定向到业务指定的结果页面。
 
 ```typescript
 import { Stripe } from 'pay-sdk-react';
@@ -598,6 +607,7 @@ export default StripeComponent;
 
 
 ### 方式三：自定义唤起 popup - 推荐 移动端 使用
+使用自定义按钮，调用 Stripe.Popup 组件，展示 Stripe 支付表单。用户完成支付后，Stripe 会重定向到业务指定的结果页面。
 
 ```typescript
 import { useRef, useState } from 'react';
@@ -640,6 +650,7 @@ export default StripeComponent;
 ```
 
 ### 方式四：自定义唤起 modal - 推荐 PC 端使用
+使用自定义按钮，调用 Stripe.Modal 组件，展示 Stripe 支付表单。用户完成支付后，Stripe 会重定向到业务指定的结果页面。
 
 ```typescript
 import { useRef, useState } from 'react';
@@ -683,7 +694,7 @@ export default StripeComponent;
 ```
 
 ### 方式五：Stripe 表单
-引入 Stripe 表单组件，自定义承接和展示时机。
+引入 Stripe 表单组件，自定义承接和展示时机。用户完成支付后，Stripe 会重定向到业务指定的结果页面。
 
 ```typescript
 import { Stripe } from 'pay-sdk-react';
@@ -707,8 +718,10 @@ export default StripeComponent;
 
 ## 空中云汇（Airwallex）
 
+引入支付组件，使用空中云汇支付。空中云汇支付完成后，空中云汇支付组件会回调 onSuccess 方法，业务执行后续逻辑。
+
 ### 方式一：PayButton
-引入支付按钮，点击唤起 popup 承接表单（推荐移动端），PC 端推荐唤起 modal。
+引入支付按钮，点击唤起 popup 承接表单（推荐移动端），PC 端推荐唤起 modal。用户完成支付后，空中云汇支付组件会回调 onSuccess 方法，业务执行后续逻辑。
 
 ```typescript
 import { PayButton, PaymentMethod } from 'pay-sdk-react';
@@ -757,6 +770,7 @@ export default AirwallexComponent;
 ```
 
 ### 方式二：自定义唤起 popup
+使用自定义按钮，调用 Airwallex.Popup 组件，展示空中云汇支付表单。用户完成支付后，空中云汇支付组件会回调 onSuccess 方法，业务执行后续逻辑。
 
 ```typescript
 import { useRef, useState } from 'react';
@@ -834,6 +848,7 @@ export default AirwallexComponent;
 ```
 
 ### 方式三：唤起 modal
+使用自定义按钮，调用 Airwallex.Modal 组件，展示空中云汇支付表单。用户完成支付后，空中云汇支付组件会回调 onSuccess 方法，业务执行后续逻辑。
 
 ```typescript
 import { useRef, useState } from 'react';
@@ -912,7 +927,7 @@ export default AirwallexComponent;
 
 
 ### 方式四：自定义承接
-引入 Airwallex 表单组件，自定义承接和展示时机。
+引入 Airwallex 表单组件，自定义承接和展示时机。用户完成支付后，空中云汇支付组件会回调 onSuccess 方法，业务执行后续逻辑。
 
 ```typescript
 import { Airwallex } from 'pay-sdk-react';
@@ -952,7 +967,7 @@ export default AirwallexComponent;
 ```
 
 ### 方式五：Airwallex.Button
-引入支付按钮，点击打开第三方支付链接，同时唤起等待支付结果蒙层。
+引入支付按钮，点击打开第三方支付链接，同时唤起等待支付结果蒙层。用户完成支付后，空中云汇会重定向到业务指定的结果页面。
 
 ```typescript
 import { Airwallex } from 'pay-sdk-react';
@@ -980,8 +995,10 @@ export default AirwallexComponent;
 
 ## Payssion
 
+引入支付组件，使用 Payssion 支付。Payssion 支付完成后，Payssion 官方会重定向到业务指定的结果页面，重定向地址由业务后端服务调用 Payssion 官方创建支付订单 API 时传入。
+
 ### 方式一：PayButton
-引入支付按钮，点击打开第三方支付链接，同时唤起等待支付结果蒙层
+引入支付按钮，点击打开第三方支付链接，同时唤起等待支付结果蒙层。用户完成支付后，Payssion 会重定向到业务指定的结果页面。
 
 ```typescript
 import { PayButton, PaymentMethod } from 'pay-sdk-react';
@@ -1016,6 +1033,7 @@ export default PayssionComponent;
 ```
 
 ### 方式二：PayssionButton
+引入 PayssionButton 按钮，点击打开第三方支付链接，同时唤起等待支付结果蒙层。用户完成支付后，Payssion 会重定向到业务指定的结果页面。
 
 ```typescript
 import { PayssionButton } from 'pay-sdk-react';
