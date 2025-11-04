@@ -92,7 +92,31 @@ export interface StripeButtonProps extends ButtonProps {
   createOrder?: CreateOrderStripeFn;
 }
 
-export type StripeButtonRef = ButtonRef;
+export interface StripeButtonRef extends ButtonRef {
+  /**
+   * @zh 打开弹窗
+   * @en Open the popup
+   */
+  openModal: (options?: BasesStripeProps) => void;
+
+  /**
+   * @zh 关闭弹窗
+   * @en Close the popup
+   */
+  closeModal: () => void;
+
+  /**
+   * @zh 打开弹窗
+   * @en Open the popup
+   */
+  openPopup: (options?: BasesStripeProps) => void;
+
+  /**
+   * @zh 关闭弹窗
+   * @en Close the popup
+   */
+  closePopup: () => void;
+}
 
 export interface StripeModalProps extends PayModalProps {
   /**

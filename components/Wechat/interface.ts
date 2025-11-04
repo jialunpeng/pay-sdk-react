@@ -47,10 +47,22 @@ export interface WechatButtonProps extends ButtonProps {
    * @zh 弹窗属性
    * @en Modal props
    */
-  modalProps?: Omit<WechatModalProps, 'visible'>;
+  modalProps?: WechatModalProps;
 }
 
-export type WechatButtonRef = ButtonRef;
+export interface WechatButtonRef extends ButtonRef {
+  /**
+   * @zh 打开弹窗
+   * @en Open the popup
+   */
+  openModal: (options?: WechatProps) => void;
+
+  /**
+   * @zh 关闭弹窗
+   * @en Close the popup
+   */
+  closeModal: () => void;
+}
 
 /**
  * @zh 创建订单函数，返回 Paypal 所需参数

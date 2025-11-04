@@ -8,7 +8,11 @@ import React, {
   useState,
 } from 'react';
 import cs from '../utils/classNames';
-import { PayssionButtonProps, PayssionButtonRef } from './interface';
+import {
+  PayssionButtonProps,
+  PayssionButtonRef,
+  PayssionSecretMap,
+} from './interface';
 import PayMask from '../PayMask';
 import Button from '../Button';
 import { IconPayssionPay } from '../icons';
@@ -35,12 +39,26 @@ const PayssionButton = forwardRef<
 
   const { onClose, ...restMaskProps } = maskProps || {};
 
-  const payssionButtonRef = useRef<PayssionButtonRef>({ nativeElement: null });
+  const payssionButtonRef = useRef<PayssionButtonRef>(null);
 
   const [showMask, setShowMask] = useState(false);
   const [payssionUrl, setPayssionUrl] = useState<string>();
 
-  useImperativeHandle(ref, () => payssionButtonRef.current);
+  useImperativeHandle(ref, () => ({
+    get nativeElement() {
+      return payssionButtonRef.current?.nativeElement || null;
+    },
+    openPayment: (options?: PayssionSecretMap) => {
+      if (options) {
+        setPayssionUrl(options.payssionUrl);
+        setShowMask(true);
+      }
+    },
+    closePayment: () => {
+      setShowMask(false);
+    },
+    current: payssionButtonRef.current,
+  }));
 
   const handlePayCreateOrder = useCallback(async () => {
     if (createOrder) {

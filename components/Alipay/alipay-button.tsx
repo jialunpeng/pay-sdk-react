@@ -11,6 +11,7 @@ import {
   AlipayButtonProps,
   AlipayButtonRef,
   AlipayModalRef,
+  AlipayProps,
 } from './interface';
 import AlipayModal from './alipay-modal';
 import Button from '../Button';
@@ -35,11 +36,21 @@ const AlipayButton = forwardRef<
     ...others
   } = props;
 
-  const alipayButtonRef = useRef<AlipayButtonRef>({ nativeElement: null });
-
+  const alipayButtonRef = useRef<AlipayButtonRef>(null);
   const alipayModalRef = useRef<AlipayModalRef>(null);
 
-  useImperativeHandle(ref, () => alipayButtonRef.current);
+  useImperativeHandle(ref, () => ({
+    get nativeElement() {
+      return alipayButtonRef.current?.nativeElement || null;
+    },
+    openModal: (options?: AlipayProps) => {
+      alipayModalRef.current?.open(options);
+    },
+    closeModal: () => {
+      alipayModalRef.current?.close();
+    },
+    current: alipayButtonRef.current,
+  }));
 
   const handlePayCreateOrder = useCallback(async () => {
     if (createOrder) {
@@ -54,12 +65,12 @@ const AlipayButton = forwardRef<
     (e: React.MouseEvent<HTMLButtonElement>) => {
       if (createOrder) {
         handlePayCreateOrder();
-      } else {
+      } else if (modalProps?.alipayProps?.formHtml) {
         alipayModalRef?.current?.open();
       }
       onClick?.(e);
     },
-    [onClick, createOrder, handlePayCreateOrder]
+    [onClick, createOrder, handlePayCreateOrder, modalProps]
   );
 
   return (

@@ -4,7 +4,7 @@ import { WechatProps } from './interface';
 import makeQrcode from '../utils/qrcode';
 import { getPrefixCls } from '../utils/getPrefixCls';
 
-const classPrefix = getPrefixCls('wechat');
+const classPrefix = getPrefixCls('wechat-qrcode');
 
 const WechatQrCode: React.FC<WechatProps> = ({
   wechatType = 'qrcode',

@@ -7,10 +7,13 @@ type WechatComponentType = typeof Wechat & {
   Modal: typeof WechatModal;
 };
 
-const WechatComponent = Wechat as WechatComponentType;
-WechatComponent.Button = WechatButton;
-WechatComponent.Modal = WechatModal;
+const WechatComponent = Object.assign({}, Wechat, {
+  Button: WechatButton,
+  Modal: WechatModal,
+}) as WechatComponentType;
 
 export * from './interface';
 
 export default WechatComponent;
+
+export { WechatButton, WechatModal };

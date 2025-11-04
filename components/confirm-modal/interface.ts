@@ -1,4 +1,4 @@
-import { OpenPayUrlMode } from '../hooks/usePayWindowOpen';
+import { OpenPayUrlMode } from '../shared/enums';
 import { PayModalProps } from '../pay-modal';
 export interface ConfirmModalProps extends PayModalProps {
   /**
@@ -18,4 +18,11 @@ export interface ConfirmModalProps extends PayModalProps {
    * @default "window"
    */
   openMode?: OpenPayUrlMode;
+
+  /**
+   * @zh 是否强制打开新窗口（仅在 openMode 为 'window' 且非移动端设备时生效）
+   * @en Whether to force open new window (only effective when openMode is 'window' and on non-mobile devices)
+   * @default false
+   */
+  forceNewWindow?: boolean;
 }

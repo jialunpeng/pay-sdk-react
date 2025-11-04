@@ -11,9 +11,12 @@ type AirwallexComponentType = typeof Airwallex & {
   Modal: typeof AirwallexModal;
 };
 
-const AirwallexComponent = Airwallex as AirwallexComponentType;
-AirwallexComponent.Button = AirwallexButton;
-AirwallexComponent.Popup = AirwallexPopup;
-AirwallexComponent.Modal = AirwallexModal;
+const AirwallexComponent = Object.assign({}, Airwallex, {
+  Button: AirwallexButton,
+  Popup: AirwallexPopup,
+  Modal: AirwallexModal,
+}) as AirwallexComponentType;
 
 export default AirwallexComponent;
+
+export { AirwallexButton, AirwallexPopup, AirwallexModal };

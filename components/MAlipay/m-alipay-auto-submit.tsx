@@ -1,6 +1,6 @@
 import React, { memo, useEffect } from 'react';
 
-interface MAlipayAutoSubmitProps {
+export interface MAlipayAutoSubmitProps {
   formHtml: string; // 后端返回的 form 字符串
 }
 

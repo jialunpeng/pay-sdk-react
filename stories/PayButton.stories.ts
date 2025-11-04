@@ -87,11 +87,10 @@ export const AirwallexEmbedded: Story = {
         onSuccess: () => {
           // 支付成功后跳转的页面
           window.location.replace(PAYPAL_URL);
-          // eslint-disable-next-line no-console
+
           console.log('success');
         },
         onError: () => {
-          // eslint-disable-next-line no-console
           console.log('error');
         },
       };

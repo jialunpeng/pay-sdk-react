@@ -1,47 +1,128 @@
+import { isMobileDevice, isTouchDevice } from '../utils/is';
+import { mergeProps } from '../utils/with-default-props';
 import { useEffect, useRef, useCallback, useState } from 'react';
+import { OpenPayUrlMode } from '../shared/enums';
+import { clientDocument, clientWindow } from '../utils/dom';
 
-/**
- * @zh 如果您希望用户在支付过程中随时可以通过"后退"按钮放弃支付并返回到您的应用，那么 href 是一个好选择;
- * @en If you want users to be able to abandon payment at any time and return to your application, then href is a good choice;
- * @zh 使用 replace: 如果您的业务逻辑是"一旦点击支付，就不能轻易返回"，replace 会更合适。例如，点击支付后，您的后端已经创建了一张"待支付"的订单。为了防止用户通过"后退"按钮回到上一个页面再次创建订单，使用 replace 可以强制用户要么完成支付，要么关闭页面，而不能"后退"到上一步。
- * @en Use replace: If your business logic is "once clicked, payment cannot be easily returned", replace is more suitable. For example, after clicking payment, your backend has already created an "awaiting payment" order. To prevent users from returning to the previous page by clicking the "back" button and creating an order again, using replace can force users to either complete payment or close the page, and cannot "back" to the previous step.
- */
-export type OpenPayUrlMode = 'window' | 'replace' | 'href';
-
-interface UsePayWindowOpenOptions {
+interface BaseUsePayWindowOpenOptions {
   payUrl: string;
   onClose?: () => void;
   onSuccess?: () => void;
   autoOpen?: boolean;
-  openMode?: OpenPayUrlMode;
+  /**
+   * @zh 组件卸载时是否关闭支付窗口
+   * @en Whether to close payment window when component unmounts
+   * @default true
+   */
+  closeWindowOnUnmount?: boolean;
 }
 
-export function usePayWindowOpen({
-  payUrl,
-  onClose,
-  onSuccess,
-  autoOpen = true,
-  openMode = 'window',
-}: UsePayWindowOpenOptions) {
+interface WindowModeOptions extends BaseUsePayWindowOpenOptions {
+  openMode?: OpenPayUrlMode.Window;
+  /**
+   * @zh 是否强制打开新窗口（仅在非移动端设备生效）
+   * @en Whether to force open new window (only effective on non-mobile devices)
+   * @default false
+   */
+  forceNewWindow?: boolean;
+}
+
+interface OtherModeOptions extends BaseUsePayWindowOpenOptions {
+  openMode?: OpenPayUrlMode.Replace | OpenPayUrlMode.Href;
+}
+
+type UsePayWindowOpenProps = WindowModeOptions | OtherModeOptions;
+
+/**
+ * @zh 获取屏幕宽度
+ * @en Get screen width
+ */
+function getScreenWidth() {
+  return (
+    clientWindow?.innerWidth ||
+    clientDocument?.documentElement?.clientWidth ||
+    clientDocument?.body?.clientWidth
+  );
+}
+
+const defaultProps: UsePayWindowOpenProps = {
+  payUrl: '',
+  openMode: OpenPayUrlMode.Window,
+  closeWindowOnUnmount: true,
+};
+
+export function usePayWindowOpen(p: UsePayWindowOpenProps) {
+  const props = mergeProps(defaultProps, p);
+
+  const {
+    payUrl,
+    onClose,
+    onSuccess,
+    autoOpen = true,
+    closeWindowOnUnmount = true,
+  } = props;
   const payWindowRef = useRef<Window | null>(null);
   const pollTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const [isWindowMonitoring, setWindowMonitoring] = useState(false);
 
+  // 创建弹窗的公共函数
+  const createPopupWindow = useCallback(
+    (url: string) => {
+      // 计算弹窗尺寸和位置，实现垂直水平居中
+      const width = Math.min(550, window.outerWidth * 0.9);
+      const height = Math.min(700, window.outerHeight);
+
+      // 使用多种定位方法确保居中
+      const left = Math.round((window.screen.availWidth - width) / 2);
+      const top = Math.round((window.screen.availHeight - height) / 2);
+      const screenX = left;
+      const screenY = top;
+
+      return window.open(
+        url,
+        'paypal_payment',
+        `width=${width},height=${height},left=${left},top=${top},screenX=${screenX},screenY=${screenY},scrollbars=yes,resizable=yes`
+      );
+    },
+    [onClose, onSuccess]
+  );
+
   // 打开支付窗口
   const openWindow = useCallback(() => {
-    if (openMode === 'window') {
+    if (props?.openMode === OpenPayUrlMode.Window) {
       if (payWindowRef.current && !payWindowRef.current.closed) {
         payWindowRef.current.focus();
       } else {
-        payWindowRef.current = window.open(payUrl);
-        setWindowMonitoring(true);
+        const isMobile = isMobileDevice() || isTouchDevice();
+        const forceNewWindow = props?.forceNewWindow;
+
+        if (isMobile) {
+          payWindowRef.current = window.open(payUrl);
+          return;
+        }
+        if (forceNewWindow) {
+          payWindowRef.current = createPopupWindow(payUrl);
+          return;
+        }
+        const screenWidth = getScreenWidth() || 0;
+
+        if (screenWidth >= 768) {
+          payWindowRef.current = createPopupWindow(payUrl);
+        } else {
+          payWindowRef.current = window.open(payUrl);
+        }
       }
-    } else if (openMode === 'replace') {
+      setWindowMonitoring(true);
+      return;
+    }
+    if (props?.openMode === OpenPayUrlMode.Replace) {
       window.location.replace(payUrl);
-    } else if (openMode === 'href') {
+      return;
+    }
+    if (props?.openMode === OpenPayUrlMode.Href) {
       window.location.href = payUrl;
     }
-  }, [payUrl, openMode]);
+  }, [payUrl, props, createPopupWindow]);
 
   // 关闭窗口
   const closeWindow = useCallback(() => {
@@ -58,7 +139,7 @@ export function usePayWindowOpen({
 
   // 轮询和消息监听
   useEffect(() => {
-    if (!isWindowMonitoring || openMode !== 'window') {
+    if (!isWindowMonitoring || props?.openMode !== OpenPayUrlMode.Window) {
       return;
     }
 
@@ -84,9 +165,11 @@ export function usePayWindowOpen({
     return () => {
       clearInterval(pollTimerRef.current!);
       window.removeEventListener('message', handleMessage);
-      payWindowRef.current?.close();
+      if (closeWindowOnUnmount) {
+        payWindowRef.current?.close();
+      }
     };
-  }, [isWindowMonitoring, openMode, onClose, onSuccess]);
+  }, [isWindowMonitoring, props, onClose, onSuccess]);
 
   return {
     openWindow,

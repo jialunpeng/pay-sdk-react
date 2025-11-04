@@ -27,7 +27,19 @@ export interface PayssionButtonProps extends ButtonProps {
   createOrder?: CreateOrderPayssionFn;
 }
 
-export type PayssionButtonRef = ButtonRef;
+export interface PayssionButtonRef extends ButtonRef {
+  /**
+   * @zh 打开支付页面
+   * @en Open payment page
+   */
+  openPayment: (options?: PayssionSecretMap) => void;
+
+  /**
+   * @zh 关闭支付页面
+   * @en Close payment page
+   */
+  closePayment: () => void;
+}
 
 export interface PayssionSecretMap {
   /**

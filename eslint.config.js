@@ -35,7 +35,7 @@ module.exports = [
     },
   },
   {
-    files: ['**/*.ts', '**/*.tsx'],
+    files: ['components/**/*.ts', 'components/**/*.tsx'],
     languageOptions: {
       parser: typescriptParser,
       parserOptions: {
@@ -49,6 +49,46 @@ module.exports = [
     plugins: { '@typescript-eslint': typescriptPlugin },
     rules: {
       ...typescriptPlugin.configs.recommended.rules,
+      '@typescript-eslint/no-explicit-any': 'off',
+      '@typescript-eslint/no-this-alias': 'off',
+      '@typescript-eslint/no-unused-vars': [
+        'warn',
+        { argsIgnorePattern: '^_' },
+      ],
+    },
+  },
+  {
+    files: ['stories/**/*.ts', 'stories/**/*.tsx'],
+    languageOptions: {
+      parser: typescriptParser,
+      parserOptions: {
+        ecmaVersion: 'latest',
+        sourceType: 'module',
+        ecmaFeatures: { jsx: true },
+      },
+    },
+    plugins: { '@typescript-eslint': typescriptPlugin },
+    rules: {
+      '@typescript-eslint/no-explicit-any': 'off',
+      '@typescript-eslint/no-this-alias': 'off',
+      '@typescript-eslint/no-unused-vars': [
+        'warn',
+        { argsIgnorePattern: '^_' },
+      ],
+    },
+  },
+  {
+    files: ['.storybook/**/*.ts', '.storybook/**/*.tsx'],
+    languageOptions: {
+      parser: typescriptParser,
+      parserOptions: {
+        ecmaVersion: 'latest',
+        sourceType: 'module',
+        ecmaFeatures: { jsx: true },
+      },
+    },
+    plugins: { '@typescript-eslint': typescriptPlugin },
+    rules: {
       '@typescript-eslint/no-explicit-any': 'off',
       '@typescript-eslint/no-this-alias': 'off',
       '@typescript-eslint/no-unused-vars': [

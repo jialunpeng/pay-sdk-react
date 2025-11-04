@@ -25,9 +25,34 @@ export interface PaypalButtonProps extends ButtonProps {
    * @en Function to create order, returns Paypal required params
    */
   createOrder?: CreateOrderPaypalFn;
+
+  /**
+   * @zh 支付状态，true 表示支付完成，false 表示支付未完成，仅在 createOrder 调用且 openMode 为 "window"时支付完成后关闭蒙层使用
+   * @en Payment status, true means payment completed, false means payment not completed, only used to close the mask when payment is completed and openMode is "window"
+   */
+  isPayment?: boolean;
+
+  /**
+   * @zh 组件卸载时是否关闭第三方支付页面，仅在 createOrder 调用且 openMode 为 "window"时支付完成后关闭蒙层使用
+   * @en Whether to close the third-party payment page when component unmounts, only effective when "isPayment" is set and openMode is "window"
+   * @default true
+   */
+  closeWindowOnUnmount?: boolean;
 }
 
-export type PaypalButtonRef = ButtonRef;
+export interface PaypalButtonRef extends ButtonRef {
+  /**
+   * @zh 打开支付页面
+   * @en Open payment page
+   */
+  openPayment: (options?: PaypalSecretMap) => void;
+
+  /**
+   * @zh 关闭支付页面
+   * @en Close payment page
+   */
+  closePayment: () => void;
+}
 
 /**
  * @zh Paypal 所需参数

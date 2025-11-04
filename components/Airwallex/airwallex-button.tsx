@@ -27,9 +27,7 @@ const AirwallexButton = forwardRef<
 >((props, ref) => {
   const { children = 'Airwallex', onClick, createOrder, ...others } = props;
 
-  const airwallexButtonRef = useRef<AirwallexButtonRef>({
-    nativeElement: null,
-  });
+  const airwallexButtonRef = useRef<AirwallexButtonRef>(null);
 
   const airwallexPopupRef = useRef<AirwallexPopupRef>(null);
   const airwallexModalRef = useRef<AirwallexModalRef>(null);
@@ -37,7 +35,33 @@ const AirwallexButton = forwardRef<
   const [showMask, setShowMask] = useState(false);
   const [airwallexUrl, setAirwallexUrl] = useState<string>();
 
-  useImperativeHandle(ref, () => airwallexButtonRef.current);
+  useImperativeHandle(ref, () => ({
+    get nativeElement() {
+      return airwallexButtonRef.current?.nativeElement || null;
+    },
+    openModal: (options?: AirwallexProps) => {
+      airwallexModalRef.current?.open(options);
+    },
+    closeModal: () => {
+      airwallexModalRef.current?.close();
+    },
+    openPopup: (options?: AirwallexProps) => {
+      airwallexPopupRef.current?.open(options);
+    },
+    closePopup: () => {
+      airwallexPopupRef.current?.close();
+    },
+    openPayment: (options?: AirwallexRedirectProps) => {
+      if (options) {
+        setAirwallexUrl(options.airwallexUrl);
+        setShowMask(true);
+      }
+    },
+    closePayment: () => {
+      setShowMask(false);
+    },
+    current: airwallexButtonRef.current,
+  }));
 
   const handlePayCreateOrder = useCallback(async () => {
     if (createOrder) {
@@ -68,9 +92,13 @@ const AirwallexButton = forwardRef<
       }
       if (props?.payMode === 'embedded') {
         if (props?.displayType === 'modal') {
-          airwallexModalRef?.current?.open();
+          if (props?.modalProps?.airwallexProps?.initOptions) {
+            airwallexModalRef?.current?.open();
+          }
         } else {
-          airwallexPopupRef?.current?.open();
+          if (props?.popupProps?.airwallexProps?.initOptions) {
+            airwallexPopupRef?.current?.open();
+          }
         }
         return;
       }
