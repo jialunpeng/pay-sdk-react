@@ -11,6 +11,7 @@ import {
   StripeButtonRef,
   StripeModalRef,
   StripePopupRef,
+  BasesStripeProps,
 } from './interface';
 import StripePopup from './stripe-popup';
 import StripeModal from './stripe-modal';
@@ -30,12 +31,29 @@ const StripeButton = forwardRef<
     ...others
   } = props;
 
-  const stripeButtonRef = useRef<StripeButtonRef>({ nativeElement: null });
+  const stripeButtonRef = useRef<StripeButtonRef>(null);
 
   const stripePopupRef = useRef<StripePopupRef>(null);
   const stripeModalRef = useRef<StripeModalRef>(null);
 
-  useImperativeHandle(ref, () => stripeButtonRef.current);
+  useImperativeHandle(ref, () => ({
+    get nativeElement() {
+      return stripeButtonRef.current?.nativeElement || null;
+    },
+    openPopup: (options?: BasesStripeProps) => {
+      stripePopupRef.current?.open(options);
+    },
+    closePopup: () => {
+      stripePopupRef.current?.close();
+    },
+    openModal: (options?: BasesStripeProps) => {
+      stripeModalRef.current?.open(options);
+    },
+    closeModal: () => {
+      stripeModalRef.current?.close();
+    },
+    current: stripeButtonRef.current,
+  }));
 
   const handlePayCreateOrder = useCallback(async () => {
     if (createOrder) {
@@ -58,14 +76,29 @@ const StripeButton = forwardRef<
         handlePayCreateOrder();
       } else {
         if (displayType === 'modal') {
-          stripeModalRef?.current?.open();
+          const clientSecret = stripeModalProps?.stripeProps?.clientSecret;
+          const stripeKey = stripeModalProps?.stripeProps?.stripeKey;
+          if (clientSecret && stripeKey) {
+            stripeModalRef?.current?.open();
+          }
         } else {
-          stripePopupRef?.current?.open();
+          const clientSecret = stripePopupProps?.stripeProps?.clientSecret;
+          const stripeKey = stripePopupProps?.stripeProps?.stripeKey;
+          if (clientSecret && stripeKey) {
+            stripePopupRef?.current?.open();
+          }
         }
       }
       onClick?.(e);
     },
-    [onClick, createOrder, handlePayCreateOrder, displayType]
+    [
+      onClick,
+      createOrder,
+      handlePayCreateOrder,
+      displayType,
+      stripeModalProps,
+      stripePopupProps,
+    ]
   );
 
   return (

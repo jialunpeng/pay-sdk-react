@@ -141,7 +141,43 @@ export type AirwallexButtonProps =
   | AirwallexButtonEmbeddedModalProps
   | AirwallexButtonEmbeddedPopupProps;
 
-export type AirwallexButtonRef = ButtonRef;
+export interface AirwallexButtonRef extends ButtonRef {
+  /**
+   * @zh 打开弹窗
+   * @en Open the popup
+   */
+  openModal: (options?: AirwallexProps) => void;
+
+  /**
+   * @zh 关闭弹窗
+   * @en Close the popup
+   */
+  closeModal: () => void;
+
+  /**
+   * @zh 打开弹窗
+   * @en Open the popup
+   */
+  openPopup: (options?: AirwallexProps) => void;
+
+  /**
+   * @zh 关闭弹窗
+   * @en Close the popup
+   */
+  closePopup: () => void;
+
+  /**
+   * @zh 打开支付页面
+   * @en Open payment page
+   */
+  openPayment: (options?: AirwallexRedirectProps) => void;
+
+  /**
+   * @zh 关闭支付页面
+   * @en Close payment page
+   */
+  closePayment: () => void;
+}
 
 export interface AirwallexModalProps extends PayModalProps {
   /**

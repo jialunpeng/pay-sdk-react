@@ -7,10 +7,13 @@ type AlipayComponentType = typeof Alipay & {
   Modal: typeof AlipayModal;
 };
 
-const AlipayComponent = Alipay as AlipayComponentType;
-AlipayComponent.Button = AlipayButton;
-AlipayComponent.Modal = AlipayModal;
+const AlipayComponent = Object.assign({}, Alipay, {
+  Button: AlipayButton,
+  Modal: AlipayModal,
+}) as AlipayComponentType;
 
 export * from './interface';
 
 export default AlipayComponent;
+
+export { AlipayButton, AlipayModal };

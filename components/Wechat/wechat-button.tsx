@@ -11,6 +11,7 @@ import {
   WechatButtonProps,
   WechatButtonRef,
   WechatModalRef,
+  WechatProps,
 } from './interface';
 import WechatModal from './wechat-modal';
 import Button from '../Button';
@@ -35,11 +36,21 @@ const WechatButton = forwardRef<
     ...others
   } = props;
 
-  const wechatButtonRef = useRef<WechatButtonRef>({ nativeElement: null });
-
+  const wechatButtonRef = useRef<WechatButtonRef>(null);
   const wechatModalRef = useRef<WechatModalRef>(null);
 
-  useImperativeHandle(ref, () => wechatButtonRef.current);
+  useImperativeHandle(ref, () => ({
+    get nativeElement() {
+      return wechatButtonRef.current?.nativeElement || null;
+    },
+    openModal: (options?: WechatProps) => {
+      wechatModalRef.current?.open(options);
+    },
+    closeModal: () => {
+      wechatModalRef.current?.close();
+    },
+    current: wechatButtonRef.current,
+  }));
 
   const handlePayCreateOrder = useCallback(async () => {
     if (createOrder) {
@@ -52,12 +63,12 @@ const WechatButton = forwardRef<
     (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
       if (createOrder) {
         handlePayCreateOrder();
-      } else {
+      } else if (modalProps?.wechatProps?.wechatUrl) {
         wechatModalRef?.current?.open();
       }
       onClick?.(e);
     },
-    [onClick, createOrder, handlePayCreateOrder]
+    [onClick, createOrder, handlePayCreateOrder, modalProps]
   );
 
   return (

@@ -1,4 +1,4 @@
-import { OpenPayUrlMode } from '../hooks/usePayWindowOpen';
+import { OpenPayUrlMode } from '../shared/enums';
 import { MaskProps } from '../Mask';
 
 /**
@@ -60,4 +60,18 @@ export interface PayMaskProps extends MaskProps {
    * @default "window"
    */
   openMode?: OpenPayUrlMode;
+
+  /**
+   * @zh 是否强制打开新窗口（仅在 openMode 为 'window' 且非移动端设备时生效）
+   * @en Whether to force open new window (only effective when openMode is 'window' and on non-mobile devices)
+   * @default false
+   */
+  forceNewWindow?: boolean;
+
+  /**
+   * @zh 组件卸载时是否关闭第三方支付页面，只在 “openMode” 为 “window” 时生效
+   * @en Whether to close the third-party payment page when component unmounts, only effective when "openMode" is "window"
+   * @default true
+   */
+  closeWindowOnUnmount?: boolean;
 }

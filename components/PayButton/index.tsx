@@ -1,48 +1,72 @@
 import React, { memo, PropsWithChildren } from 'react';
-import { PayButtonProps, PayButtonRef } from './interface';
+import { PayButtonProps, GenericPayButtonRef } from './interface';
 import { PaymentMethod } from '../shared';
-import { PaypalButton } from '../Paypal';
-import Stripe from '../Stripe';
-import Airwallex from '../Airwallex';
-import { PayssionButton } from '../Payssion';
-import { MWechatButton } from '../MWeChat';
-import Alipay from '../Alipay';
-import Wechat from '../Wechat';
-import MAlipay from '../MAlipay';
+import { PaypalButton, PaypalButtonRef } from '../Paypal';
+import { StripeButton, StripeButtonRef } from '../Stripe';
+import { AirwallexButton, AirwallexButtonRef } from '../Airwallex';
+import { PayssionButton, PayssionButtonRef } from '../Payssion';
+import { MWechatButton, MWeChatButtonRef } from '../MWeChat';
+import { AlipayButton, AlipayButtonRef } from '../Alipay';
+import { WechatButton, WechatButtonRef } from '../Wechat';
+import { MAlipayButton, MAlipayButtonRef } from '../MAlipay';
 
 const PayButton = React.forwardRef<
-  PayButtonRef,
+  GenericPayButtonRef,
   PropsWithChildren<PayButtonProps>
 >((props, ref) => {
+  const typedRef = ref as React.Ref<GenericPayButtonRef>;
+
   if (
     props.payMethod === PaymentMethod.PaypalH5 ||
     props.payMethod === PaymentMethod.PaypalPc
   ) {
-    return <PaypalButton ref={ref} {...props} />;
+    return (
+      <PaypalButton ref={typedRef as React.Ref<PaypalButtonRef>} {...props} />
+    );
   }
   if (
     props.payMethod === PaymentMethod.StripeH5 ||
     props.payMethod === PaymentMethod.StripePc
   ) {
-    return <Stripe.Button ref={ref} {...props} />;
+    return (
+      <StripeButton ref={typedRef as React.Ref<StripeButtonRef>} {...props} />
+    );
   }
   if (props.payMethod === PaymentMethod.Airwallex) {
-    return <Airwallex.Button ref={ref} {...props} />;
+    return (
+      <AirwallexButton
+        ref={typedRef as React.Ref<AirwallexButtonRef>}
+        {...props}
+      />
+    );
   }
   if (props.payMethod === PaymentMethod.Payssion) {
-    return <PayssionButton ref={ref} {...props} />;
+    return (
+      <PayssionButton
+        ref={typedRef as React.Ref<PayssionButtonRef>}
+        {...props}
+      />
+    );
   }
   if (props.payMethod === PaymentMethod.WechatH5) {
-    return <MWechatButton ref={ref} {...props} />;
+    return (
+      <MWechatButton ref={typedRef as React.Ref<MWeChatButtonRef>} {...props} />
+    );
   }
   if (props.payMethod === PaymentMethod.AlipayH5) {
-    return <MAlipay.Button ref={ref} {...props} />;
+    return (
+      <MAlipayButton ref={typedRef as React.Ref<MAlipayButtonRef>} {...props} />
+    );
   }
   if (props.payMethod === PaymentMethod.AlipayPc) {
-    return <Alipay.Button ref={ref} {...props} />;
+    return (
+      <AlipayButton ref={typedRef as React.Ref<AlipayButtonRef>} {...props} />
+    );
   }
   if (props.payMethod === PaymentMethod.WechatPc) {
-    return <Wechat.Button ref={ref} {...props} />;
+    return (
+      <WechatButton ref={typedRef as React.Ref<WechatButtonRef>} {...props} />
+    );
   }
   return null;
 });

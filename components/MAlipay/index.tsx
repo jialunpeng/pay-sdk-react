@@ -7,7 +7,10 @@ type MAlipayComponentType = typeof MAlipay & {
   Button: typeof MAlipayButton;
 };
 
-const MAlipayComponent = MAlipay as MAlipayComponentType;
-MAlipayComponent.Button = MAlipayButton;
+const MAlipayComponent = Object.assign({}, MAlipay, {
+  Button: MAlipayButton,
+}) as MAlipayComponentType;
 
 export default MAlipayComponent;
+
+export { MAlipayButton };

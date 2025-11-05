@@ -123,13 +123,24 @@ export async function isImageLinkAvailable(url: string): Promise<boolean> {
   });
 }
 
-export function isMobile() {
+/**
+ * @zh 检测是否为移动设备
+ * @en Detect if it's a mobile device
+ */
+export function isMobileDevice() {
   return (
     clientWindow &&
-    /Android|iPhone|iPad|iPod|Windows Phone|BlackBerry|Mobile/i.test(
+    /Android|webOS|iPhone|iPad|iPod|Windows Phone|BlackBerry|Mobile|IEMobile|Opera Mini/i.test(
       clientWindow?.navigator.userAgent
     )
   );
+}
+/**
+ * @zh 检测是否为触摸设备
+ * @en Detect if it's a touch device
+ */
+export function isTouchDevice(): boolean {
+  return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 }
 
 export function isEmail(email: string) {

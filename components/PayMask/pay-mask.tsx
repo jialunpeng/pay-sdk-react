@@ -5,6 +5,7 @@ import { usePayWindowOpen } from '../hooks/usePayWindowOpen';
 import { mergeProps } from '../utils/with-default-props';
 import cs from '../utils/classNames';
 import { getPrefixCls } from '../utils/getPrefixCls';
+import { OpenPayUrlMode } from '../shared/enums';
 
 const classPrefix = getPrefixCls('mask');
 
@@ -26,8 +27,10 @@ const PayMask: React.FC<PayMaskProps> = (p) => {
     onContinue,
     openMode,
     autoOpenWindow,
+    forceNewWindow,
     className,
     destroyOnClose = true,
+    closeWindowOnUnmount = true,
     ...rest
   } = props;
 
@@ -41,6 +44,8 @@ const PayMask: React.FC<PayMaskProps> = (p) => {
     },
     autoOpen: autoOpenWindow,
     openMode,
+    closeWindowOnUnmount,
+    ...(openMode === OpenPayUrlMode.Window && { forceNewWindow }),
   });
 
   useEffect(() => {

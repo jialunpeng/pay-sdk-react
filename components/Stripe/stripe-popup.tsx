@@ -11,7 +11,7 @@ import {
   StripePopupProps,
   StripePopupRef,
 } from './interface';
-import Stripe from '.';
+import Stripe from './stripe';
 import PayPopup from '../pay-popup';
 import { getPrefixCls } from '../utils/getPrefixCls';
 const StripePopup = React.forwardRef<

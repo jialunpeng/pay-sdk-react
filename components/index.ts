@@ -16,7 +16,19 @@ export type {
   CreateOrderStripeFn,
   StripeModalRef,
 } from './Stripe/interface';
-export { default as Stripe } from './Stripe';
+import StripeDefault from './Stripe';
+import { StripeButton, StripePopup, StripeModal } from './Stripe';
+const Stripe = Object.assign({}, StripeDefault, {
+  Button: StripeButton,
+  Popup: StripePopup,
+  Modal: StripeModal,
+}) as typeof StripeDefault & {
+  Button: typeof StripeButton;
+  Popup: typeof StripePopup;
+  Modal: typeof StripeModal;
+};
+export { Stripe };
+export { StripeButton, StripePopup, StripeModal };
 
 export type {
   AirwallexProps,
@@ -29,7 +41,20 @@ export type {
   AirwallexModalProps,
   AirwallexModalRef,
 } from './Airwallex/interface';
-export { default as Airwallex } from './Airwallex';
+
+import AirwallexDefault from './Airwallex';
+import { AirwallexButton, AirwallexPopup, AirwallexModal } from './Airwallex';
+const Airwallex = Object.assign({}, AirwallexDefault, {
+  Button: AirwallexButton,
+  Popup: AirwallexPopup,
+  Modal: AirwallexModal,
+}) as typeof AirwallexDefault & {
+  Button: typeof AirwallexButton;
+  Popup: typeof AirwallexPopup;
+  Modal: typeof AirwallexModal;
+};
+export { Airwallex };
+export { AirwallexButton, AirwallexPopup, AirwallexModal };
 
 export type {
   PayssionButtonProps,
@@ -53,7 +78,16 @@ export type {
   CreateOrderMAlipayFn,
   MAlipayFormData,
 } from './MAlipay/interface';
-export { default as MAlipay } from './MAlipay';
+
+import MAlipayDefault from './MAlipay';
+import { MAlipayButton } from './MAlipay';
+const MAlipay = Object.assign({}, MAlipayDefault, {
+  Button: MAlipayButton,
+}) as typeof MAlipayDefault & {
+  Button: typeof MAlipayButton;
+};
+export { MAlipay };
+export { MAlipayButton };
 
 export type {
   AlipayProps,
@@ -62,7 +96,17 @@ export type {
   AlipayButtonRef,
   AlipayModalRef,
 } from './Alipay/interface';
-export { default as Alipay } from './Alipay';
+import AlipayDefault from './Alipay';
+import { AlipayButton, AlipayModal } from './Alipay';
+const Alipay = Object.assign({}, AlipayDefault, {
+  Button: AlipayButton,
+  Modal: AlipayModal,
+}) as typeof AlipayDefault & {
+  Button: typeof AlipayButton;
+  Modal: typeof AlipayModal;
+};
+export { Alipay };
+export { AlipayButton, AlipayModal };
 
 export type {
   WechatProps,
@@ -71,9 +115,24 @@ export type {
   WechatButtonRef,
   WechatModalRef,
 } from './Wechat/interface';
-export { default as Wechat } from './Wechat';
+import WechatDefault from './Wechat';
+import { WechatButton, WechatModal } from './Wechat';
 
-export type { PayButtonProps, PayButtonRef } from './PayButton/interface';
-export { default as PayButton } from './PayButton';
+const Wechat = Object.assign({}, WechatDefault, {
+  Button: WechatButton,
+  Modal: WechatModal,
+}) as typeof WechatDefault & {
+  Button: typeof WechatButton;
+  Modal: typeof WechatModal;
+};
+export { Wechat };
+export { WechatButton, WechatModal };
+
+export type {
+  PayButtonProps,
+  GenericPayButtonRef,
+} from './PayButton/interface';
+import PayButton from './PayButton';
+export { PayButton };
 
 export * from './shared';

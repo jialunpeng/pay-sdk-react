@@ -11,9 +11,12 @@ type StripeComponentType = typeof Stripe & {
   Modal: typeof StripeModal;
 };
 
-const StripeComponent = Stripe as StripeComponentType;
-StripeComponent.Button = StripeButton;
-StripeComponent.Popup = StripePopup;
-StripeComponent.Modal = StripeModal;
+const StripeComponent = Object.assign({}, Stripe, {
+  Button: StripeButton,
+  Popup: StripePopup,
+  Modal: StripeModal,
+}) as StripeComponentType;
 
 export default StripeComponent;
+
+export { StripeButton, StripePopup, StripeModal };

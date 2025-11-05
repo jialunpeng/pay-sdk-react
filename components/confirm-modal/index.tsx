@@ -2,6 +2,7 @@ import React, { useCallback } from 'react';
 import { ConfirmModalProps } from './interface';
 import { usePayWindowOpen } from '../hooks/usePayWindowOpen';
 import PayModal from '../pay-modal';
+import { OpenPayUrlMode } from '../shared/enums';
 
 const ConfirmModal: React.FC<ConfirmModalProps> = (props) => {
   const {
@@ -25,7 +26,8 @@ const ConfirmModal: React.FC<ConfirmModalProps> = (props) => {
     onClose,
     payUrl,
     autoOpenWindow = false,
-    openMode = 'window',
+    openMode = OpenPayUrlMode.Window,
+    forceNewWindow,
   } = props;
 
   const {
@@ -43,6 +45,7 @@ const ConfirmModal: React.FC<ConfirmModalProps> = (props) => {
     onClose,
     autoOpen: autoOpenWindow,
     openMode: openMode,
+    ...(openMode === OpenPayUrlMode.Window && { forceNewWindow }),
   });
 
   const handleClose = useCallback(() => {

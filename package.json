@@ -1,6 +1,6 @@
 {
   "name": "pay-sdk-react",
-  "version": "1.1.2",
+  "version": "1.1.13",
   "private": false,
   "publishConfig": {
     "access": "public"
@@ -39,6 +39,18 @@
   "homepage": "https://github.com/jialunpeng/pay-sdk-react",
   "bugs": {
     "url": "https://github.com/jialunpeng/pay-sdk-react/issues"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/es/index.d.ts",
+      "import": "./dist/es/index.js",
+      "require": "./dist/lib/index.js",
+      "default": "./dist/es/index.js"
+    },
+    "./dist/css/index.css": "./dist/css/index.css",
+    "./dist/css/index.min.css": "./dist/css/index.min.css",
+    "./css/index.css": "./dist/css/index.css",
+    "./css/index.min.css": "./dist/css/index.min.css"
   },
   "files": [
     "dist"

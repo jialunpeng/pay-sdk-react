@@ -6,9 +6,14 @@ import React, {
   useImperativeHandle,
   useRef,
   useState,
+  useEffect,
 } from 'react';
 import { IconPaypalText, IconPaypalWhite } from '../icons';
-import { PaypalButtonProps, PaypalButtonRef } from './interface';
+import {
+  PaypalButtonProps,
+  PaypalButtonRef,
+  PaypalSecretMap,
+} from './interface';
 import cs from '../utils/classNames';
 import PayMask from '../PayMask';
 import Button from '../Button';
@@ -29,17 +34,39 @@ const PaypalButton = forwardRef<
     paypalUrl: propsPaypalUrl,
     createOrder,
     maskProps,
+    isPayment,
+    closeWindowOnUnmount = true,
     ...others
   } = props;
 
   const { onClose: onMaskClose, ...restMaskProps } = maskProps || {};
 
-  const paypalButtonRef = useRef<PaypalButtonRef>({ nativeElement: null });
+  const paypalButtonRef = useRef<PaypalButtonRef>(null);
 
   const [showMask, setShowMask] = useState(false);
   const [paypalUrl, setPaypalUrl] = useState<string>();
 
-  useImperativeHandle(ref, () => paypalButtonRef.current);
+  useEffect(() => {
+    if (createOrder && isPayment) {
+      setShowMask(false);
+    }
+  }, [createOrder, isPayment]);
+
+  useImperativeHandle(ref, () => ({
+    get nativeElement() {
+      return paypalButtonRef.current?.nativeElement || null;
+    },
+    openPayment: (options?: PaypalSecretMap) => {
+      if (options) {
+        setPaypalUrl(options.paypalUrl);
+        setShowMask(true);
+      }
+    },
+    closePayment: () => {
+      setShowMask(false);
+    },
+    current: paypalButtonRef.current,
+  }));
 
   const handlePayCreateOrder = useCallback(async () => {
     if (createOrder) {
@@ -96,6 +123,7 @@ const PaypalButton = forwardRef<
               PayPal
             </>
           }
+          closeWindowOnUnmount={closeWindowOnUnmount}
           {...restMaskProps}
         />
       )}

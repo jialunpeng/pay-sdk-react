@@ -54,10 +54,22 @@ export interface AlipayButtonProps extends ButtonProps {
    * @zh 弹窗属性
    * @en Modal props
    */
-  modalProps?: Omit<AlipayModalProps, 'visible'>;
+  modalProps?: AlipayModalProps;
 }
 
-export type AlipayButtonRef = ButtonRef;
+export interface AlipayButtonRef extends ButtonRef {
+  /**
+   * @zh 打开弹窗
+   * @en Open the popup
+   */
+  openModal: (options?: AlipayProps) => void;
+
+  /**
+   * @zh 关闭弹窗
+   * @en Close the popup
+   */
+  closeModal: () => void;
+}
 
 /**
  * @zh 创建订单函数，返回 Paypal 所需参数

@@ -56,3 +56,25 @@ export enum PaymentMethod {
    */
   Airwallex = 'airwallex',
 }
+
+/**
+ * @zh 支付页面打开模式枚举
+ * @en Payment page opening mode enum
+ */
+export enum OpenPayUrlMode {
+  /**
+   * @zh 新页面或弹窗模式 - 使用 window.open() 打开新页面或弹窗，支持智能设备检测
+   * @en New page or popup mode - Use window.open() to open new page or popup, supports smart device detection
+   */
+  Window = 'window',
+  /**
+   * @zh 新页面模式 - 使用 window.location.href 跳转到新页面
+   * @en New page mode - Use window.location.href to navigate to new page
+   */
+  Href = 'href',
+  /**
+   * @zh 替换页面模式 - 使用 window.location.replace 替换当前页面
+   * @en Replace page mode - Use window.location.replace to replace current page
+   */
+  Replace = 'replace',
+}

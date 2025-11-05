@@ -134,27 +134,16 @@ export type PayButtonProps =
   | RealAlipayButtonProps
   | RealWechatButtonProps;
 
-// payMethod 到 ref 的映射
-type PayButtonRefMap = {
-  [PaymentMethod.PaypalH5]: PaypalButtonRef;
-  [PaymentMethod.PaypalPc]: PaypalButtonRef;
-  [PaymentMethod.StripeH5]: StripeButtonRef;
-  [PaymentMethod.StripePc]: StripeButtonRef;
-  [PaymentMethod.Airwallex]: AirwallexButtonRef;
-  [PaymentMethod.Payssion]: PayssionButtonRef;
-  [PaymentMethod.WechatH5]: MWeChatButtonRef;
-  [PaymentMethod.AlipayH5]: MAlipayButtonRef;
-  [PaymentMethod.AlipayPc]: AlipayButtonRef;
-  [PaymentMethod.WechatPc]: WechatButtonRef;
-};
-
 /**
- * @zh 根据 payMethod 自动分发 ref 类型
- * @en Auto-dispatch ref type by payMethod
+ * @zh 通用的支付按钮 ref 类型，支持所有支付方式
+ * @en Generic pay button ref type that supports all payment methods
  */
-export type PayButtonRef<T extends PayButtonProps = PayButtonProps> =
-  T extends { payMethod: infer M }
-    ? M extends keyof PayButtonRefMap
-      ? PayButtonRefMap[M]
-      : never
-    : never;
+export type GenericPayButtonRef =
+  | PaypalButtonRef
+  | StripeButtonRef
+  | AirwallexButtonRef
+  | PayssionButtonRef
+  | MWeChatButtonRef
+  | MAlipayButtonRef
+  | AlipayButtonRef
+  | WechatButtonRef;
