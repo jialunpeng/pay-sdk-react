@@ -110,5 +110,14 @@ module.exports = [
   {
     rules: { 'jsx-quotes': ['error', 'prefer-double'] },
   },
-  { ignores: ['node_modules', 'dist', 'build', 'coverage', '**/*.min.js'] },
+  {
+    ignores: [
+      'node_modules',
+      'dist',
+      'build',
+      'coverage',
+      '**/*.min.js',
+      '.history',
+    ],
+  },
 ];

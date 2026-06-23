@@ -8,3 +8,6 @@ export { default as IconStripeText } from './IconStripeText';
 export { default as IconAlipay } from './IconAlipay';
 export { default as IconWechatPay } from './IconWechatPay';
 export { default as IconPayssionPay } from './IconPayssionPay';
+export { default as IconPix } from './IconPix';
+export { default as IconCopy } from './IconCopy';
+export { default as IconCheck } from './IconCheck';

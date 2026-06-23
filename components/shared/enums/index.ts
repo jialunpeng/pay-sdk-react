@@ -55,6 +55,16 @@ export enum PaymentMethod {
    * @en Airwallex
    */
   Airwallex = 'airwallex',
+  /**
+   * @zh PIX(pc)
+   * @en PIX(pc)
+   */
+  PixPc = 'pix-pc',
+  /**
+   * @zh PIX(H5)
+   * @en PIX(H5)
+   */
+  PixH5 = 'pix-h5',
 }
 
 /**

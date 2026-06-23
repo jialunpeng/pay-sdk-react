@@ -1,11 +1,11 @@
 {
   "name": "pay-sdk-react",
-  "version": "1.1.13",
+  "version": "1.1.14",
   "private": false,
   "publishConfig": {
     "access": "public"
   },
-  "description": "A cross-platform payment SDK for React, supporting Alipay, WeChat Pay, PayPal, Stripe, Payssion, and Airwallex, compatible with H5, PC, and App environments.",
+  "description": "A cross-platform payment SDK for React, supporting Alipay, WeChat Pay, PayPal, Stripe, Payssion, Airwallex, and PIX, compatible with H5, PC, and App environments.",
   "keywords": [
     "react",
     "payment",
@@ -20,6 +20,10 @@
     "payssion",
     "空中云汇",
     "airwallex",
+    "pix",
+    "巴西pix",
+    "pix支付",
+    "巴西支付",
     "跨端",
     "h5",
     "pc",
@@ -89,6 +93,7 @@
   },
   "lint-staged": {
     "*.{js,ts,tsx}": [
+      "prettier --write",
       "npx eslint components/ --fix"
     ],
     "*.{cjs,json}": [
@@ -106,6 +111,9 @@
     "extends": [
       "react-app",
       "react-app/jest"
+    ],
+    "ignorePatterns": [
+      ".history"
     ]
   },
   "browserslist": {

@@ -14,6 +14,7 @@ import {
 import Stripe from './stripe';
 import PayPopup from '../pay-popup';
 import { getPrefixCls } from '../utils/getPrefixCls';
+
 const StripePopup = React.forwardRef<
   StripePopupRef,
   PropsWithChildren<StripePopupProps>

@@ -6,20 +6,24 @@ English | [简体中文](./README.zh-CN.md)
 
 # Features
 
-
 ## Comprehensive
-Supports mainstream payment methods such as Alipay, WeChat Pay, PayPal, Stripe, Payssion, and Airwallex, covering the vast majority of business scenarios.
+
+Supports mainstream payment methods such as Alipay, WeChat Pay, PayPal, Stripe, Payssion, Airwallex, and PIX, covering the vast majority of business scenarios.
 
 ## Cross-Platform Compatibility
+
 Available for H5, PC, and App scenarios, adaptable to multiple platforms to meet diverse business needs.
 
 ## TypeScript Friendly
+
 All components are written in TypeScript, ensuring type safety and an excellent development experience.
 
 ## Multiple Integration Forms
+
 Supports payment buttons, modals, QR codes, forms, popups, modals, overlays, and more. Flexible combinations to suit various business scenarios.
 
 # Install
+
 [npm package](https://www.npmjs.com/package/pay-sdk-react)
 
 ```shell
@@ -53,6 +57,7 @@ ReactDOM.render(<App />, document.getElementById('app'));
 ```
 
 ### On-Demand Loading
+
 Using babel-plugin-import
 
 #### 1. Install
@@ -61,8 +66,8 @@ Using babel-plugin-import
 npm i babel-plugin-import -D
 ```
 
-
 #### 2. Add Configuration: Component and Style On-demand Import
+
 Add the following to your babel config:
 
 ```js
@@ -82,9 +87,11 @@ plugins: [
 # Payment Scenarios & Usage
 
 ## Alipay
+
 ### PC
 
 #### Method 1: Use the provided Pay Button
+
 Import the Pay Button, click to trigger a modal displaying the Alipay QR code. After the user scans the QR code to complete payment, Alipay will notify the business backend of the payment result.
 
 ```typescript
@@ -112,7 +119,9 @@ export default AlipayComponent;
 ```
 
 #### Method 2: Use a Alipay button
+
 Import Alipay, Alipay.Button click to trigger a modal displaying the Alipay QR code. After the user scans the QR code to complete payment, Alipay will notify the business backend of the payment result.
+
 ```typescript
 import { Alipay } from 'pay-sdk-react';
 
@@ -135,8 +144,8 @@ const AlipayComponent = () => {
 export default AlipayComponent;
 ```
 
-
 #### Method 3: Use a custom button
+
 Use your own button, and call the modal component to display the QR code. After the user scans the QR code to complete payment, Alipay will notify the business backend of the payment result.
 
 ```typescript
@@ -178,6 +187,7 @@ export default AlipayComponent;
 ```
 
 #### Method 4: Custom integration
+
 Directly import the QR code component and customize the integration and display timing. After the user scans the QR code to complete payment, Alipay will notify the business backend of the payment result.
 
 ```typescript
@@ -199,6 +209,7 @@ export default AlipayComponent;
 ### H5
 
 #### Method 1: PayButton
+
 Import the PayButton, click to trigger a waiting modal (or overlay), auto-submit the iframe form to launch the Alipay app, or open in browser if the app is not installed. After the user completes payment, Alipay will notify the business backend of the payment result. Result handling: supports both modal and overlay.
 
 ```typescript
@@ -230,6 +241,7 @@ export default MAlipayComponent;
 ```
 
 #### Method 2: MAlipay.Button
+
 Import MAlipay.Button, click to trigger a waiting modal (or overlay), auto-submit the iframe form to launch the Alipay app, or open in browser if the app is not installed. After the user completes payment, Alipay will notify the business backend of the payment result.
 
 ```typescript
@@ -260,8 +272,8 @@ const MAlipayComponent = () => {
 export default MAlipayComponent;
 ```
 
-
 #### Method 3: Custom form
+
 Import the MAlipay form component and customize the trigger timing. After the user completes payment, Alipay will notify the business backend of the payment result.
 
 ```typescript
@@ -287,6 +299,7 @@ export default MAlipayComponent;
 ### PC
 
 #### Method 1: PayButton
+
 Import the PayButton, click to trigger a modal displaying the WeChat QR code. After the user scans the QR code to complete payment, WeChat will notify the business backend of the payment result.
 
 ```typescript
@@ -314,6 +327,7 @@ export default WechatComponent;
 ```
 
 #### Method 2: Wechat.Button
+
 Import Wechat.Button, click to trigger a modal displaying the WeChat QR code. After the user scans the QR code to complete payment, WeChat will notify the business backend of the payment result.
 
 ```typescript
@@ -339,6 +353,7 @@ export default WechatComponent;
 ```
 
 #### Method 3: Use a custom button
+
 Use your own button, and call the modal component to display the QR code. After the user scans the QR code to complete payment, WeChat will notify the business backend of the payment result.
 
 ```typescript
@@ -380,6 +395,7 @@ export default WechatComponent;
 ```
 
 #### Method 4: Custom integration
+
 Directly import the QR code component and customize the integration and display timing. After the user scans the QR code to complete payment, WeChat will notify the business backend of the payment result.
 
 ```typescript
@@ -402,6 +418,7 @@ export default WechatComponent;
 ### H5
 
 #### Method 1: PayButton
+
 Import the PayButton, click to trigger a waiting modal (or overlay), auto-open the WeChat payment link, and auto-trigger payment in the WeChat browser. After the user completes payment, WeChat will notify the business backend of the payment result. Result handling: supports both modal and overlay.
 
 ```typescript
@@ -437,6 +454,7 @@ export default MWechatComponent;
 ```
 
 #### Method 2: MWechatButton
+
 Import MWechatButton, click to trigger a waiting modal (or overlay), auto-open the WeChat payment link, and auto-trigger payment in the WeChat browser. After the user completes payment, WeChat will notify the business backend of the payment result.
 
 ```typescript
@@ -463,6 +481,7 @@ export default MWechatComponent;
 Import the PayButton, click to trigger payment, auto-open the PayPal payment link, and show a waiting overlay. After PayPal payment is completed, PayPal will redirect to the business-specified result page, and the redirect address is passed in when the business backend service calls the PayPal official payment order creation API.
 
 ### Method 1: PayButton
+
 Import the PayButton, click to trigger payment, auto-open the PayPal payment link, and show a waiting overlay. After the user completes payment, PayPal will redirect to the business-specified result page.
 
 ```typescript
@@ -499,6 +518,7 @@ export default PaypalComponent;
 ```
 
 ### Method 2: PaypalButton
+
 Import PaypalButton, click to trigger payment, auto-open the PayPal payment link, and show a waiting overlay. After the user completes payment, PayPal will redirect to the business-specified result page.
 
 ```typescript
@@ -554,6 +574,7 @@ export default PaypalComponent;
 Import payment components to use Stripe payment. After Stripe payment is completed, Stripe will redirect to the business-specified result page, and the redirect address is passed in when the business backend service calls the Stripe official payment order creation API.
 
 ### Method 1: PayButton
+
 Import the PayButton, click to trigger payment modal or popup, display Stripe payment form. After the user completes payment, Stripe will redirect to the business-specified result page.
 
 ```typescript
@@ -580,6 +601,7 @@ export default StripeComponent;
 ```
 
 ### Method 2: Stripe.Button
+
 Import Stripe.Button, click to trigger payment modal or popup, display Stripe payment form. After the user completes payment, Stripe will redirect to the business-specified result page.
 
 ```typescript
@@ -603,8 +625,8 @@ const StripeComponent = () => {
 export default StripeComponent;
 ```
 
-
 ### Method 3: Custom trigger popup - Recommended for mobile
+
 Use custom button to call Stripe.Popup component, display Stripe payment form. After the user completes payment, Stripe will redirect to the business-specified result page.
 
 ```typescript
@@ -648,6 +670,7 @@ export default StripeComponent;
 ```
 
 ### Method 4: Custom trigger modal - Recommended for PC
+
 Use custom button to call Stripe.Modal component, display Stripe payment form. After the user completes payment, Stripe will redirect to the business-specified result page.
 
 ```typescript
@@ -692,6 +715,7 @@ export default StripeComponent;
 ```
 
 ### Method 5: Stripe Form
+
 Import the Stripe form component and customize the integration and display timing. After the user completes payment, Stripe will redirect to the business-specified result page.
 
 ```typescript
@@ -719,6 +743,7 @@ export default StripeComponent;
 Import payment components to use Airwallex payment. After Airwallex payment is completed, the Airwallex payment component will callback the onSuccess method, and the business executes subsequent logic.
 
 ### Method 1: PayButton
+
 Import the PayButton, click to trigger a popup for the payment form (recommended for mobile), or a modal for PC. After the user completes payment, the Airwallex payment component will callback the onSuccess method, and the business executes subsequent logic.
 
 ```typescript
@@ -768,6 +793,7 @@ export default AirwallexComponent;
 ```
 
 ### Method 2: Custom trigger popup
+
 Use custom button to call Airwallex.Popup component, display Airwallex payment form. After the user completes payment, the Airwallex payment component will callback the onSuccess method, and the business executes subsequent logic.
 
 ```typescript
@@ -846,6 +872,7 @@ export default AirwallexComponent;
 ```
 
 ### Method 3: Trigger modal
+
 Use custom button to call Airwallex.Modal component, display Airwallex payment form. After the user completes payment, the Airwallex payment component will callback the onSuccess method, and the business executes subsequent logic.
 
 ```typescript
@@ -923,8 +950,8 @@ const AirwallexComponent = () => {
 export default AirwallexComponent;
 ```
 
-
 ### Method 4: Custom integration
+
 Import the Airwallex form component and customize the integration and display timing. After the user completes payment, the Airwallex payment component will callback the onSuccess method, and the business executes subsequent logic.
 
 ```typescript
@@ -965,6 +992,7 @@ export default AirwallexComponent;
 ```
 
 ### Method 5: Airwallex.Button
+
 Import the Pay Button, click to open a third-party payment link and show a waiting overlay. After the user completes payment, Airwallex will redirect to the business-specified result page.
 
 ```typescript
@@ -991,11 +1019,200 @@ const AirwallexComponent = () => {
 export default AirwallexComponent;
 ```
 
+## PIX
+
+Import payment components to use PIX payment (Brazilian instant payment system). After the user scans the PIX QR code and completes payment, the business backend will receive the payment notification.
+
+### PC
+
+#### Method 1: PayButton
+
+Import the PayButton, click to trigger a modal displaying the PIX QR code. After the user scans the QR code to complete payment, the business backend will receive the payment notification.
+
+```typescript
+import { PayButton, PaymentMethod } from 'pay-sdk-react';
+
+const PixComponent = () => {
+  const createOrder = async () => {
+    const res = await fetch('/create-order', {
+      method: 'POST',
+    });
+    return { pixCode: res.pixCode };
+  };
+
+  return (
+    <div className="pix-component">
+      <h3>PayButton - Basic Usage</h3>
+      <PayButton payMethod={PaymentMethod.PixPc} createOrder={createOrder}>
+        Pay Button
+      </PayButton>
+    </div>
+  );
+};
+
+export default PixComponent;
+```
+
+#### Method 2: Pix.Button
+
+Import Pix.Button, click to trigger a modal displaying the PIX QR code. After the user scans the QR code to complete payment, the business backend will receive the payment notification.
+
+```typescript
+import { Pix } from 'pay-sdk-react';
+
+const PixComponent = () => {
+  const createOrder = async () => {
+    const res = await fetch('/create-order', {
+      method: 'POST',
+    });
+    return { pixCode: res.pixCode };
+  };
+
+  return (
+    <div className="pix-component">
+      <h3>Pix.Button - modal</h3>
+      <Pix.Button createOrder={createOrder}>PIX Button</Pix.Button>
+    </div>
+  );
+};
+
+export default PixComponent;
+```
+
+#### Method 3: Custom button
+
+Use your own button, and call the modal component to display the QR code. After the user scans the QR code to complete payment, the business backend will receive the payment notification.
+
+```typescript
+import { useRef, useState } from 'react';
+import { Pix, PixModalRef } from 'pay-sdk-react';
+
+const pixCode = '00020126580014br.gov.bcb.pix...';
+
+const PixComponent = () => {
+  const modalRef = useRef<PixModalRef>(null);
+
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const createOrder = async () => {
+    const res = await fetch('/create-order', {
+      method: 'POST',
+    });
+    modalRef.current?.open({ pixCode: res.pixCode });
+  };
+
+  return (
+    <div className="pix-component">
+      <h3>Custom Button - Trigger modal with visible prop</h3>
+      <button onClick={() => setModalVisible(true)}>Custom Button</button>
+      <Pix.Modal
+        visible={modalVisible}
+        onClose={() => setModalVisible(false)}
+        pixProps={{ pixCode }}
+      />
+
+      <h3>Custom Button - Trigger modal with ref open method</h3>
+      <button onClick={() => createOrder()}>Custom Button</button>
+      <Pix.Modal ref={modalRef} />
+    </div>
+  );
+};
+
+export default PixComponent;
+```
+
+#### Method 4: Custom integration
+
+Directly import the QR code component and customize the integration and display timing. After the user scans the QR code to complete payment, the business backend will receive the payment notification.
+
+```typescript
+import { Pix } from 'pay-sdk-react';
+
+const pixCode = '00020126580014br.gov.bcb.pix...';
+
+const PixComponent = () => {
+  return (
+    <div className="pix-component">
+      <h3>Pix Form - Custom integration</h3>
+      <Pix pixCode={pixCode} />
+    </div>
+  );
+};
+
+export default PixComponent;
+```
+
+### H5
+
+#### Method 1: PayButton
+
+Import the PayButton, click to trigger a waiting modal (or overlay), auto-open the PIX payment link. After the user completes payment, the business backend will receive the payment notification.
+
+```typescript
+import { PayButton, PaymentMethod } from 'pay-sdk-react';
+
+const MPixComponent = () => {
+  const createOrder = async () => {
+    const res = await fetch('/create-order', {
+      method: 'POST',
+    });
+    return { pixCode: res.pixCode };
+  };
+
+  return (
+    <div className="m-pix-component">
+      <h3>PayButton - Basic Usage</h3>
+      <PayButton payMethod={PaymentMethod.PixH5} createOrder={createOrder}>
+        Pay Button
+      </PayButton>
+      <h3>PayButton - Mask</h3>
+      <PayButton
+        payMethod={PaymentMethod.PixH5}
+        createOrder={createOrder}
+        displayType="mask"
+      >
+        Pay Button
+      </PayButton>
+    </div>
+  );
+};
+
+export default MPixComponent;
+```
+
+#### Method 2: MPix.Button
+
+Import MPix.Button, click to trigger a waiting modal (or overlay), auto-open the PIX payment link. After the user completes payment, the business backend will receive the payment notification.
+
+```typescript
+import { MPixButton } from 'pay-sdk-react';
+
+const pixCode = '00020126580014br.gov.bcb.pix...';
+
+const MPixComponent = () => {
+  return (
+    <div className="m-pix-component">
+      <h3>PIX Button - Modal</h3>
+      <MPixButton displayType="modal" pixCode={pixCode}>
+        PIX Button
+      </MPixButton>
+      <h3>PIX Button - Mask</h3>
+      <MPixButton displayType="mask" pixCode={pixCode}>
+        PIX Button
+      </MPixButton>
+    </div>
+  );
+};
+
+export default MPixComponent;
+```
+
 ## Payssion
 
 Import payment components to use Payssion payment. After Payssion payment is completed, Payssion will redirect to the business-specified result page, and the redirect address is passed in when the business backend service calls the Payssion official payment order creation API.
 
 ### Method 1: PayButton
+
 Import the PayButton, click to open a third-party payment link and show a waiting overlay. After the user completes payment, Payssion will redirect to the business-specified result page.
 
 ```typescript
@@ -1031,6 +1248,7 @@ export default PayssionComponent;
 ```
 
 ### Method 2: PayssionButton
+
 Import PayssionButton, click to open a third-party payment link and show a waiting overlay. After the user completes payment, Payssion will redirect to the business-specified result page.
 
 ```typescript

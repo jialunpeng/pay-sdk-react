@@ -129,6 +129,34 @@ export { Wechat };
 export { WechatButton, WechatModal };
 
 export type {
+  PixProps,
+  PixButtonProps,
+  PixButtonRef,
+  CreateOrderPixFn,
+  PixModalProps,
+  PixModalRef,
+} from './Pix/interface';
+import PixDefault from './Pix';
+import { PixButton, PixModal } from './Pix';
+const Pix = Object.assign({}, PixDefault, {
+  Button: PixButton,
+  Modal: PixModal,
+}) as typeof PixDefault & {
+  Button: typeof PixButton;
+  Modal: typeof PixModal;
+};
+export { Pix };
+export { PixButton, PixModal };
+
+export type {
+  MPixButtonProps,
+  MPixButtonRef,
+  CreateOrderMPixFn,
+  MPixFormData,
+} from './MPix/interface';
+export { MPixButton } from './MPix';
+
+export type {
   PayButtonProps,
   GenericPayButtonRef,
 } from './PayButton/interface';
