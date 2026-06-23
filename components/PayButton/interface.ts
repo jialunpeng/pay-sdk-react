@@ -7,6 +7,8 @@ import { MWeChatButtonProps, MWeChatButtonRef } from '../MWeChat';
 import { MAlipayButtonProps, MAlipayButtonRef } from '../MAlipay';
 import { AlipayButtonProps, AlipayButtonRef } from '../Alipay';
 import { WechatButtonProps, WechatButtonRef } from '../Wechat';
+import { PixButtonProps, PixButtonRef } from '../Pix';
+import { MPixButtonProps, MPixButtonRef } from '../MPix';
 
 /**
  * @zh PayPal 按钮基础属性
@@ -121,6 +123,34 @@ type RealAlipayButtonProps = BaseAlipayButtonProps & AlipayButtonProps;
 type RealWechatButtonProps = BaseWechatButtonProps & WechatButtonProps;
 
 /**
+ * @zh PIX 按钮基础属性
+ * @en Base props for PIX button
+ */
+interface BasePixButtonProps {
+  payMethod: PaymentMethod.PixPc;
+}
+
+/**
+ * @zh MPix 按钮基础属性
+ * @en Base props for MPix button
+ */
+interface BaseMPixButtonProps {
+  payMethod: PaymentMethod.PixH5;
+}
+
+/**
+ * @zh Pix 按钮完整属性
+ * @en Full props for Pix button
+ */
+type RealPixButtonProps = BasePixButtonProps & PixButtonProps;
+
+/**
+ * @zh MPix 按钮完整属性
+ * @en Full props for MPix button
+ */
+type RealMPixButtonProps = BaseMPixButtonProps & MPixButtonProps;
+
+/**
  * @zh 支付按钮属性联合类型，根据 payMethod 自动分发
  * @en Union type for pay button props, auto-dispatch by payMethod
  */
@@ -132,7 +162,9 @@ export type PayButtonProps =
   | RealMWeChatButtonProps
   | RealMAlipayButtonProps
   | RealAlipayButtonProps
-  | RealWechatButtonProps;
+  | RealWechatButtonProps
+  | RealPixButtonProps
+  | RealMPixButtonProps;
 
 /**
  * @zh 通用的支付按钮 ref 类型，支持所有支付方式
@@ -146,4 +178,6 @@ export type GenericPayButtonRef =
   | MWeChatButtonRef
   | MAlipayButtonRef
   | AlipayButtonRef
-  | WechatButtonRef;
+  | WechatButtonRef
+  | PixButtonRef
+  | MPixButtonRef;

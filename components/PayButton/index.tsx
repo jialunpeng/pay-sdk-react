@@ -9,6 +9,8 @@ import { MWechatButton, MWeChatButtonRef } from '../MWeChat';
 import { AlipayButton, AlipayButtonRef } from '../Alipay';
 import { WechatButton, WechatButtonRef } from '../Wechat';
 import { MAlipayButton, MAlipayButtonRef } from '../MAlipay';
+import { PixButton, PixButtonRef } from '../Pix';
+import { MPixButton, MPixButtonRef } from '../MPix';
 
 const PayButton = React.forwardRef<
   GenericPayButtonRef,
@@ -67,6 +69,12 @@ const PayButton = React.forwardRef<
     return (
       <WechatButton ref={typedRef as React.Ref<WechatButtonRef>} {...props} />
     );
+  }
+  if (props.payMethod === PaymentMethod.PixPc) {
+    return <PixButton ref={typedRef as React.Ref<PixButtonRef>} {...props} />;
+  }
+  if (props.payMethod === PaymentMethod.PixH5) {
+    return <MPixButton ref={typedRef as React.Ref<MPixButtonRef>} {...props} />;
   }
   return null;
 });

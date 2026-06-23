@@ -1,0 +1,82 @@
+@import '../../style/default.less';
+
+.@{prefix}-pix-qrcode {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__container {
+    background-color: #fff;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 180px;
+    height: 180px;
+  }
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__tip {
+    text-align: center;
+    color: #333;
+    font-size: 14px;
+    line-height: 20px;
+    margin-top: 12px;
+  }
+
+  &__code-section {
+    width: 100%;
+    max-width: 320px;
+    margin-top: 16px;
+  }
+
+  &__copy-btn {
+    width: 100%;
+    padding: 10px 16px;
+    border: 1px solid #32bcad;
+    background-color: #fff;
+    color: #32bcad;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+
+    &:hover {
+      background-color: rgba(50, 188, 173, 0.06);
+    }
+
+    &:active {
+      background-color: rgba(50, 188, 173, 0.12);
+    }
+
+    &--copied {
+      color: #2ecc71;
+      border-color: #2ecc71;
+      background-color: rgba(46, 204, 113, 0.04);
+
+      &:hover {
+        background-color: rgba(46, 204, 113, 0.08);
+      }
+
+      &:active {
+        background-color: rgba(46, 204, 113, 0.14);
+      }
+    }
+  }
+
+  &__copy-icon {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+  }
+}
